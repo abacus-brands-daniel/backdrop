@@ -1,0 +1,172 @@
+.template-search {
+    .panel--large {
+        .panel-body {
+            margin-bottom: 3rem;
+        }
+    }
+}
+
+.u-hidden+.page-content {
+    width: 100%;
+}
+
+.search-suggestion {
+    margin-bottom: 2rem;
+    @extend .fs-14;
+
+    @include tablet-small {
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+    }
+    a{
+        text-decoration: underline;
+    }
+}
+
+/*========Search preview=========*/
+
+.quickSearchResults {
+    margin-top: 0;
+
+    .productGrid {
+        @include tablet-small {
+            padding-top: 2rem;
+        }
+
+        li {
+            @include tablet-small {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .card {
+            @include tablet-small {
+                flex-direction: inherit;
+                height: auto;
+                margin-bottom: 0;
+                padding: 1rem;
+            }
+
+            &-figure {
+                @include tablet-small {
+                    width: 6rem;
+                }
+            }
+
+            &-body {
+                @include tablet-small {
+                    width: calc(100% - 6rem);
+                    display: block;
+                    text-align: left;
+                }
+
+                .card-button-block {
+                    @include tablet-small {
+                        display: none;
+                    }
+                }
+            }
+
+            &-img-container {
+                img {
+                    @include tablet-small {
+                        padding: 0.3rem;
+                        @include border-radius(1.2rem);
+                    }
+                }
+
+                &::after {
+                    @include tablet-small {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .card--alternate {
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        overflow: hidden;
+
+        &:hover {
+            .card-body {
+                background-color: $color-white;
+
+                .card-title {
+                    color: $color-secondary;
+
+                    >a {
+                        color: $color-secondary;
+                    }
+                }
+
+                .price-section {
+                    span {
+                        color: $color-secondary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*========Search preview=========*/
+.advancedSearch-form{
+    .advancedSearch-form{
+        margin-bottom: 0;
+    }
+    .select2.select2-container, .select.form-select{
+        width: 100% !important;
+    }
+    .search-price-range{
+        label{
+            input {
+                @media (min-width:551px){
+                    width: 15rem;
+                }
+            }
+        }
+    }
+    .form-checkbox, .form-radio{
+        + .form-label{
+            font-weight: 600;
+            padding-left: 3rem;
+            &::before{
+                width: 1.7rem;
+                height: 1.7rem;
+            }
+            &::after{
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7' fill='none'%3E%3Cpath d='M8.02548 0.469608L2.91407 5.67324L0.97416 3.69794C0.844456 3.56572 0.634208 3.56572 0.504504 3.6976C0.374801 3.82981 0.374801 4.04386 0.504504 4.17591L2.91423 6.6297L8.49513 0.947584C8.62484 0.815874 8.62484 0.601656 8.49513 0.469608C8.36543 0.337391 8.15518 0.337391 8.02548 0.469608Z' fill='%23B48B31' stroke='%23B48B31' stroke-width='0.35'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-size: 0.9rem auto;
+                background-color: transparent;
+            }
+        }
+    }
+}
+.pages-search{
+    .page{
+        margin-left: -2rem;
+        margin-right: -2rem;
+    }
+    .category-suggestion{
+        margin-bottom: 1rem;
+        @include mobile{
+            width: 100%;
+        }
+    }
+}
+#search-results-content{
+    .search-content{
+        margin: 0;
+        p{
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+}

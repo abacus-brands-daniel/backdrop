@@ -1,0 +1,15 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+<div class="filter">
+    {{> components/products/filter sort=pagination.brand.sort}}
+</div>
+
+<div class="products-content" data-list-name="Brand: {{brand.name}}" data-aos="fade-up" data-aos-duration="5000">
+    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+        {{> components/products/grid products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{else}}
+        {{> components/products/list products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list"}}
+    {{/if}}
+</div>
+{{#if pagination.brand.links}}
+{{> components/common/paginator pagination.brand}}
+{{/if}}

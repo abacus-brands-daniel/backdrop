@@ -1,0 +1,27 @@
+---
+customer:
+orders:
+limit: 3
+---
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <h2 class="account-heading title" data-aos="fade-up" data-aos-duration="5000">{{lang 'account.orders.heading' }}</h2>
+    </div>
+</div>
+<div class="common-t-s-page" data-aos="fade-up" data-aos-duration="5000">
+    <div class="container">
+        <div class="account">
+            {{> components/account/navigation account_page='orders'}}
+            <div class="account-row orders-row">
+                <section class="orders">
+                    {{> components/account/orders-list orders=customer.orders}}
+                    {{> components/common/small-paginator pagination.orders}}
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}

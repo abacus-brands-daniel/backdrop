@@ -1,0 +1,6 @@
+{{#each product.custom_fields}}
+    {{#all (if name '!=' 'customers_canvas_integrated') (if name '!=' 'customers_canvas_editor_family')}}
+        <dt class="productView-info-name">{{name}}:</dt>
+        <dd class="productView-info-value">{{{value}}}</dd>
+    {{/all}}
+{{/each}}

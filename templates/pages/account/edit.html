@@ -1,0 +1,25 @@
+{{inject 'passwordRequirements' settings.password_requirements}}
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <h2 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{lang 'account.settings.heading' }}</h2>
+    </div>
+</div>
+<div class="common-t-s-page" data-aos="fade-up" data-aos-duration="500">
+    <div class="container">
+        <div class="account account--fixed">
+            {{> components/account/navigation account_page='settings'}}
+            {{#if forms.edit_account.error}}
+            {{> components/common/alert/alert-error forms.edit_account.error}}
+            {{/if}}
+            {{#if forms.edit_account.success}}
+            {{> components/common/alert/alert-success forms.edit_account.success}}
+            {{/if}}
+            {{> components/account/edit-account}}
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

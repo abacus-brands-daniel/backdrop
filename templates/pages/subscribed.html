@@ -1,0 +1,33 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+        <h1 class="page-heading" tabindex="0" role="status" aria-live="assertive">
+            {{#if subscription.error}}
+            {{lang 'newsletter.subscribed_heading_error'}}
+            {{else}}
+            {{lang 'newsletter.subscribed_heading'}}
+            {{/if}}
+        </h1>
+</div>
+</div>        
+        <div class="container">
+<section class="page">
+    <div class="page-content page-content--centered">
+
+        {{#if subscription.error}}
+            {{> components/common/alert/alert-error subscription.error}}
+        {{else}}
+            {{> components/common/alert/alert-success (lang 'newsletter.subscribed_message')}}
+        {{/if}}
+
+    </div>
+</section>
+</div>
+
+<script>
+    const subscriptionStatusElement = document.querySelector('.page-content > .page-heading');
+    if (subscriptionStatusElement) subscriptionStatusElement.focus();
+</script>
+
+{{/partial}}
+{{> layout/base}}

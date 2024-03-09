@@ -1,0 +1,42 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+          {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{#unless theme_settings.hide_contact_us_page_heading }}
+        <h1 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{page.title}}</h1>
+        {{/unless}}
+    </div>
+</div>
+<div class="common-t-s-page">
+
+    <div class="container">
+        <section class="page" data-aos="fade-up" data-aos-duration="500">
+            
+            
+            {{#if page.sub_pages}}
+            <nav class="navBar navBar--sub">
+                <ul class="navBar-section account-navigation">
+                    {{#each page.sub_pages}}
+                    <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+                    {{/each}}
+                </ul>
+        </nav>
+        {{/if}}
+
+        <div id="contact-us-page" class="page-content page-content--centered">
+            {{#if forms.contact.success}}
+            <div id="contact-us-success">{{{lang 'forms.contact_us.successful' shopPath=urls.home}}}</div>
+            {{else}}
+            <p>{{{page.content}}}</p>
+            {{> components/page/contact-us-form}}
+            {{/if}}
+            
+        </div>
+    </section>
+</div>
+</div>
+
+
+{{/partial}}
+
+{{> layout/base}}

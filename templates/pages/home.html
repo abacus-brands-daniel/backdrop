@@ -1,0 +1,81 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        summary: 130
+        limit: {{theme_settings.homepage_blog_posts_count}}
+---
+{{#partial "hero"}}
+    {{{region name="home_below_menu"}}}
+    {{!--{{#and carousel carousel.slides.length}}
+        {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
+    {{/and}}--}}
+    {{> components/dh-custom/carousel}}
+    {{{region name="home_below_carousel"}}}
+{{/partial}}
+{{#partial "full-page"}}
+{{{region name="home_shopByCategory"}}}
+
+{{{region name="home_B4B"}}}
+
+{{{region name="home_product_features"}}}
+
+<div class="trending-products">
+    <div class="wave"></div>
+    <div class="container ">
+        {{#if products.featured}}
+        {{> components/dh-custom/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+        {{/if}}
+    </div>
+</div>
+<div class="gradient-block-box">
+    {{{region name="home_product_offers"}}}
+    
+    {{#if blog.recent_posts}}
+    <div class="home-blog">
+        <div class="container">
+            <h2 class="page-heading product-list-title" data-aos="fade-up" data-aos-duration="500">You heard it here &nbsp;<span>first...</span></span></h2>
+            <p class="blog-text text-center" data-aos="fade-up" data-aos-duration="500">Check out our blog for the most up to date information on our products!</p>
+            <div class="home-blog-list-wrap clearfix">
+                <div class="custom-row d-flex flex-wrap row blog-grid-style">
+                    {{#each (limit blog.recent_posts 3)}}
+                    {{> components/dh-custom/blogs/post post=this index=@index theme_settings=../theme_settings}}
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>
+
+{{{region name="home_testimonials"}}}
+
+<section class="ig-frequently-block bg-dark-blue" >
+    <div class="wave"></div>
+    <span class="object-fill-circle"></span>
+    <div class="ig-block-hide">
+    <div class="container">
+        <div class="object-fill-bluelight-circle"></div>
+      <div class="ig-inspiration-block" data-aos="fade-up" data-aos-duration="5000">
+        <h2 class="page-heading" data-aos="fade-up" data-aos-duration="5000"><span>Follow us</span> for more inspiration!</h2>
+        <p class="text-center page-heading" data-aos="fade-up" data-aos-duration="5000">@backdrop_com #backdropmoments</p>
+        <div class="ig-feed ig-hide-data" data-aos="fade-up" data-aos-duration="5000">
+            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+            <div class="elfsight-app-1f8dc892-f38f-431f-8dba-0017d72c1701"></div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        {{{region name="home_faqs"}}}
+      
+    </div>
+  </section>
+{{/partial}}
+{{> layout/base}}

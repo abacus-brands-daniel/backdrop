@@ -1,0 +1,78 @@
+---
+brand:
+    products:
+        limit: {{theme_settings.brandpage_products_per_page}}
+---
+{{inject "brandProductsPerPage" theme_settings.brandpage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.brand.previous}}
+        <link rel="prev" href="{{pagination.brand.previous}}">
+    {{/if}}
+    {{#if pagination.brand.next}}
+        <link rel="next" href="{{pagination.brand.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "full-page"}}
+<div class="category-banner bg-category-banner {{#unless brand.image}}no-image{{/unless}}">
+
+      <div class="container">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            <div class="category-banner-main">
+                <div class="category-banner-wrap d-flex">
+                    <div class="category-banner-block content-block" data-aos="fade-up" data-aos-duration="500">
+                        <h1 class="page-heading">{{brand.name}}</h1>
+                        
+                    </div>
+                    {{#if brand.image}}
+                    <div class="category-banner-block image-block">
+                      <div class="cat-img" data-aos="fade-up" data-aos-duration="500">
+                        
+                        <div class="brand-image-container">
+                            {{> components/common/responsive-img
+                                image=brand.image
+                                fallback_size=theme_settings.thumb_size
+                                lazyload='disabled'
+                            }}
+                        </div>
+                    
+                      </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+
+    </div>
+</div>
+<div class="page-block">
+    <div class="container">
+    <div class="product-list-mobile-top-bar">
+        <div class="mobile-filter-box">
+            <div class="filter-by">Filter by</div>
+        </div>
+        <div class="mobile-sort-box"></div>
+    </div>
+{{{region name="brand_below_header"}}}
+<div class="page" data-aos="fade-up" data-aos-duration="5000">
+    <aside class="page-sidebar" id="faceted-search-container" data-aos="fade-up" data-aos-duration="5000">
+        {{> components/brand/sidebar}}
+    </aside>
+
+    <div class="page-content" id="product-listing-container" data-aos="fade-up" data-aos-duration="5000">
+        {{#if brand.search_error }}
+            <p>{{lang 'search.errorMessage'}}</p>
+        {{else}}
+            {{#if brand.products}}
+                {{> components/brand/product-listing}}
+            {{else}}
+                <p>{{lang 'brands.no_products'}}</p>
+            {{/if}}
+            {{{region name="brand_below_content"}}}
+        {{/if}}
+    </div>
+</div>
+</div>
+</div>
+{{{region name="brand_below_header"}}}
+{{/partial}}
+{{> layout/base}}

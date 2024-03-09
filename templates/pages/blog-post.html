@@ -1,0 +1,15 @@
+{{#partial "full-page"}}
+<div class="breadcrumbs-wrap bg-cream-banner">
+    <div class=" container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    </div>
+</div>
+</div>
+</div>
+<div class="common-t-s-page blog-detail">
+    <div class="container">
+        {{> components/dh-custom/blogs/post post=blog.post show_tags=true is_blog_post=true}}
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}

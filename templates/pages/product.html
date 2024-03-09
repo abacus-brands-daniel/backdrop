@@ -1,0 +1,63 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'productId' product.id}}
+{{inject 'product' product}}
+{{inject 'customer' customer}}
+{{#partial "full-page"}}
+<div class="breadcrumbs-wrap">
+    <div class=" container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    </div>
+</div>
+<span class="object-triAngles"></span>
+<div class="container">
+    {{#each product.shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+    <div id="customers-canvas-container" style="">
+        <div id="customers-canvas-editor-parent" style="">
+        </div>
+    </div>
+
+    <div>
+        {{#contains (pluck product.custom_fields 'name') 'customers_canvas_integrated'}}
+            {{#contains (pluck product.custom_fields 'value') 'simple_editor'}}
+                {{> components/customers-canvas/customers-canvas-se}}
+            {{else}}
+                {{> components/dh-custom/products/product-view}}
+            {{/contains}}
+        {{else}}
+            {{> components/dh-custom/products/product-view}}
+        {{/contains}}
+
+        {{{region name="product_below_content"}}}
+    </div>
+
+    {{> components/products/schema}}
+</div>
+{{#if product.videos.list.length}}
+<div class="productView-video">
+    <span class="object-fill-circle"></span>
+    <div class="container">
+            {{> components/dh-custom/products/videos product.videos}}
+    </div>
+</div>
+{{/if}}
+{{!--{{#all settings.show_product_reviews theme_settings.show_product_reviews (if theme_settings.show_product_details_tabs '!==' true)}}
+    {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+{{/all}}--}}
+{{> components/dh-custom/products/reviews reviews=product.reviews product=product urls=urls}}
+{{> components/dh-custom/products/related-products}}
+{{!--{{> components/products/tabs}}--}}
+{{/partial}}
+{{> layout/base}}

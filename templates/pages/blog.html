@@ -1,0 +1,44 @@
+---
+blog:
+    posts:
+        limit: {{theme_settings.blogpage_products_per_page}}
+        pages: 3
+        summary: 120
+---
+
+{{inject "ProductsPerPage" theme_settings.blogpage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.blog.previous}}
+        <link rel="prev" href="{{pagination.blog.previous}}">
+    {{/if}}
+    {{#if pagination.blog.next}}
+        <link rel="next" href="{{pagination.blog.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+        
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{#unless theme_settings.hide_blog_page_heading }}
+        <h1 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{ blog.name }}</h1>
+    {{/unless}}
+    </div>
+    </div>
+        <section class="common-t-s-page">
+    <div class="container">
+
+    <div class="blog-grid-style page">
+    {{#each blog.posts}}
+        {{> components/dh-custom/blogs/post post=this theme_settings=../theme_settings}}
+    {{/each}}
+    </div>
+    {{#if pagination.blog}}  
+    {{> components/common/paginator pagination.blog}}
+    {{/if}}
+    </div>
+</section>
+
+{{/partial}}
+{{> layout/base}}

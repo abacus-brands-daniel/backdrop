@@ -1,0 +1,25 @@
+{{#if product_results.products}}
+    {{> components/common/modal/modal-close-btn additional_attr='data-drop-down-close'}}
+    <ul class="productGrid" data-list-name="Quick Search Results">
+        {{#each (limit product_results.products 4)}}
+        <li class="product">
+                {{> components/dh-custom/products/card
+                        settings=../settings
+                        alternate=true
+                        show_compare=../show_compare
+                        theme_settings=../theme_settings
+                        customer=../customer
+                        event="list"
+                        position=(add @index 1)
+                }}
+        </li>
+        {{/each}}
+    </ul>
+    <div class="view-all-btn">
+        <button class="button button--primary view-all" type="button" id="custom-search">view all products</button>
+    </div>
+{{else}}
+    <p class="quickSearchMessage">
+        {{{lang 'search.results.quick_count' count=pagination.product_results.total search_query=(sanitize forms.search.query) }}}
+    </p>
+{{/if}}

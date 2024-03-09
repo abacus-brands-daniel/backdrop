@@ -1,0 +1,18 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+{{#if product_results.products.length}}
+<div class="filter">
+    {{> components/products/filter sort=pagination.product_results.sort}}
+</div>
+{{/if}}
+<div class="products-content" data-list-name="Search Results" data-aos="fade-up" data-aos-duration="5000" data-total-product="{{category.total_products}}">
+    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+        {{> components/products/grid products=product_results.products show_compare=product_results.show_compare event="list" theme_settings=theme_settings}}
+    {{else}}
+        {{> components/products/list products=product_results.products show_compare=product_results.show_compare event="list" theme_settings=theme_settings}}
+    {{/if}}
+</div>
+
+{{#if pagination.product_results.links}}
+{{> components/common/paginator pagination.product_results}}
+{{/if}}

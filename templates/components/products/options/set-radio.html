@@ -1,0 +1,85 @@
+{{#if this.display_name '!==' 'customers-canvas-personalize'}}
+<div class="form-field" data-product-attribute="set-radio" role="radiogroup" aria-labelledby="radio-group-label-{{id}}">
+    <label class="form-label form-label--alternate form-label--inlineSmall" id="radio-group-label-{{id}}">
+        {{ this.display_name }}{{#if required}}<span class="required">*</span>{{/if}}:
+
+        {{!--{{> components/common/requireness-msg}}--}}
+    </label>
+
+    {{#unless required}}
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_radio_{{id}}_none"
+            name="attribute[{{id}}]"
+            value=""
+            checked="{{#if defaultValue '==' ''}}checked{{/if}}"
+        >
+        <label class="form-label" for="attribute_radio_{{id}}_none">{{lang 'products.none'}}</label>
+    {{/unless}}
+
+    {{#each this.values}}
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_radio_{{../id}}_{{id}}"
+            name="attribute[{{../id}}]"
+            value="{{id}}"
+            {{#if selected}}
+                checked
+                data-default
+            {{/if}}
+            {{#if ../required}}required{{/if}}>
+        <label data-product-attribute-value="{{id}}" class="form-label" for="attribute_radio_{{../id}}_{{id}}">{{this.label}}</label>
+    {{/each}}
+</div>
+{{else}}
+<div class="form-field" data-product-attribute="set-radio" role="radiogroup" aria-labelledby="radio-group-label-{{id}}" style="display: none;">
+    <label class="form-label form-label--alternate form-label--inlineSmall" id="radio-group-label-{{id}}">
+        {{ this.display_name }}{{#if required}}<span class="required">*</span>{{/if}}:
+
+        {{!--{{> components/common/requireness-msg}}--}}
+    </label>
+
+    {{#unless required}}
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_radio_{{id}}_none"
+            name="attribute[{{id}}]"
+            value=""
+            checked="{{#if defaultValue '==' ''}}checked{{/if}}"
+        >
+        <label class="form-label" for="attribute_radio_{{id}}_none">{{lang 'products.none'}}</label>
+    {{/unless}}
+
+    {{#each this.values}}
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_radio_{{../id}}_{{id}}"
+            name="attribute[{{../id}}]"
+            value="{{id}}"
+            {{#if selected}}
+                checked
+                data-default
+            {{/if}}
+            {{#if ../required}}required{{/if}}>
+        <label data-product-attribute-value="{{id}}" class="form-label" for="attribute_radio_{{../id}}_{{id}}">{{this.label}}</label>
+    {{/each}}
+</div>
+    <script>
+        const values = [];
+        {{#each this.values}} 
+            values.push({id:"{{id}}",label:"{{this.label}}" });
+        {{/each}}
+
+        let customersCanvasOptions = {
+            personalizeOption : {
+                id: {{id}},
+                values: values
+            }
+        };
+        window.BCData.customersCanvasOptions = customersCanvasOptions;
+    </script>
+{{/if}}

@@ -1,0 +1,12 @@
+{{#if product.related_products}}
+<div class="productView-related">
+    <div class="container">
+        <div class="page-heading" data-aos="fade-up" data-aos-duration="500">{{{lang 'products.related_products'}}}</div>
+        <div class="related-products" data-aos="fade-up" data-aos-duration="500">
+            {{> components/dh-custom/products/carousel products=product.related_products columns=5 list="Related Products"}}
+        </div>
+    </div>
+</div>
+{{/if}}
+
+

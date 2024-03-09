@@ -1,0 +1,9 @@
+<h2 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{{lang 'products.featured' }}}</h2>
+<div data-aos="fade-up" data-aos-duration="500">
+    {{#if settings.data_tag_enabled}}
+        {{> components/dh-custom/products/carousel products=products list="Featured Products"}}
+    {{else}}
+        {{> components/dh-custom/products/carousel products=products}}
+    {{/if}}
+</div>
+

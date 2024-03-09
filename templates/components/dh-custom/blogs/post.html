@@ -1,0 +1,66 @@
+<div class="blog-item blog-item-{{index}}" data-aos="fade-up" data-aos-duration="500">
+    <article class="blog">
+        <div class="blog-post-figure">
+            {{#if post.thumbnail}}
+            <figure class="blog-thumbnail" data-aos="fade-up" data-aos-duration="500">
+                <a href="{{post.url}}">
+                    {{> components/common/responsive-img
+                    image=post.thumbnail
+                    fallback_size=theme_settings.blog_size
+                    lazyload=theme_settings.lazyload_mode
+                    }}
+                </a>
+            </figure>
+            {{else}}
+            <figure class="blog-thumbnail no-image">
+                <a href="{{post.url}}">
+                    <img class="sub-no-img" src="{{cdn 'img/no-product-img.png'}}" alt="No Image" title="No Image">
+                </a>
+            </figure>
+            {{/if}}
+        </div>
+
+        <div class="blog-post-body">
+            <header class="blog-header" data-aos="fade-up" data-aos-duration="500">
+                <h{{#if is_blog_post}}1{{else}}2{{/if}} class="blog-title">
+                    {{#if is_blog_post}}{{post.title}}{{else}}<a href="{{post.url}}">{{post.title}}</a>{{/if}}
+                    
+                </h{{#if is_blog_post}}1{{else}}2{{/if}}>
+                <p class="blog-date">{{#if post.author}}{{lang 'blog.posted_by' name=post.author}} on
+                    {{/if}}{{post.date_published}}</p>
+                <!-- {{#if page_type '==' 'blog'}} -->
+                <!-- {{/if}} -->
+
+            </header>
+
+            <div class="blog-post" data-aos="fade-up" data-aos-duration="500">
+                {{#if post.body}}
+                {{{post.body}}}
+                {{else}}
+                {{{post.summary}}}
+                {{#if post.show_read_more}}
+                &hellip; <a href="{{url}}" class="link" aria-label="{{post.title}} {{lang 'blog.read_more'}}">{{lang
+                    'blog.read_more'}}</a>
+                {{/if}}
+                {{/if}}
+            </div>
+            <div class="blog-tag-share">
+                {{#if show_tags}}
+                {{#if post.tags}}
+                <ul class="tags" data-aos="fade-up" data-aos-duration="500">
+                    {{#each post.tags}}
+                    <li class="tag">
+                        <a class="button button--primary" href="{{url}}">#{{name}}</a>
+                    </li>
+                    {{/each}}
+                </ul>
+                
+                {{/if}}
+                {{/if}}
+                <div data-aos="fade-up" data-aos-duration="500">
+                    {{>components/common/share url=post.url}}
+                </div>
+            </div>
+        </div>
+    </article>
+</div>

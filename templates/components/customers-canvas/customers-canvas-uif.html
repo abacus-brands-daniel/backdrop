@@ -1,0 +1,330 @@
+<style>
+    :root {
+  --au-h1-font_-_font-weight: 400;
+  --au-h2-font_-_font-weight: 400;
+  --au-h3-font_-_font-weight: 400;
+  --au-header-button-geometry_-_border-radius: 20px;
+  --au-header-button-geometry_-_min-width: 80px;
+  --aurigma-drawer-panel-desktop-width: 30% !important;
+}
+
+.au-popup-close-button {
+    display: none !important;
+}
+
+.skip-to-main-link {
+    display: none;
+}
+</style>
+
+<script type="application/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+
+<script>
+
+    var context = JSON.parse({{ jsContext }});
+    var integrationInfo;
+    var userInfo;
+    var storefront;
+
+    async function loadEditor(context, formData, restoreData) {
+        await editorInitialization(context, formData, restoreData);
+        updateDriverParams(formData);
+    }
+
+    function updateDriverParams(formData) {
+        let driver = window.auWizard.scope.driver;
+        driver.cart.lineItems[0].quantity = getQuantity(formData);
+    }
+
+    function getQuantity(formData) {
+        let quantity = 1;
+        const quantityParam = formData.find(x => { return x['name'] === 'qty[]' });
+        if (quantityParam) {
+            quantity = quantityParam['value'];
+        }
+
+        return quantity;
+    }
+
+    function getFormData() {
+        let forms = document.querySelectorAll('form[data-cart-item-add]')
+        if (!forms || forms.length === 0) {
+            console.error('Product options form was not found.');
+            return;
+        }
+        let form = forms[0];
+        let button = form.querySelector('#personalize-button');
+        if (!button) {
+            button = form.querySelector('button[name=\"add-to-cart\"]');
+        }
+        if (!button) {
+            console.error('Submit button was not found.');
+            return;
+        }
+
+        console.log(form);
+        let formData = jQuery(form).serializeArray();
+        addPersonalizeYesOptionToFormData(formData);
+        return formData;
+    }
+
+    function addPersonalizeYesOptionToFormData(formData) {
+      const personalizeOption = window.BCData?.customersCanvasOptions?.personalizeOption;
+      if(!personalizeOption) {
+          console.error("Personalize option is not found");
+          return;
+      };
+
+      formData.find(f => f.name === `attribute[${personalizeOption.id}]`).value =  personalizeOption.values.find(v => v.label == 'Yes').id;
+    }
+
+    function showEditor() {
+        // hideLockShroud();
+
+        if (window.auWizard && window.auWizard.scope.driver) {
+            window.auWizard.showEditorPopup();
+        } else {
+            document.getElementById('customers-canvas-editor-parent').addEventListener('load', function () {
+                window.auWizard.showEditorPopup();
+            });
+        }
+    }
+
+    async function editorInitialization(context, formData, restoreState) {
+        
+        const config = JSON.parse(this.integrationInfo.config);
+        config.displayInPopup = true;
+        this.integrationInfo.config = JSON.stringify(config);
+        this.integrationInfo.ecommerceSystemType = 7;
+        this.integrationInfo.optionBasedProductInfo.selectedVariantSku = window.BCData.product_attributes.sku ?? ""
+
+        const container = document.querySelector("#customers-canvas-editor-parent");
+
+        const productModel = context.product;
+        setOptionsToModel(formData, productModel);
+        const orderRestoreData = restoreState ? restoreOrderData() : null;
+        const driver = await this.storefront.loadEditor(container, this.integrationInfo, this.userInfo, productModel, orderRestoreData);
+
+        const personalizeButton = document.querySelector('#personalize-button');
+        personalizeButton.disabled = false;
+
+        this.storefront.onFinish.subscribe(async (bo, project) => {
+            for (let x of project.line_items) {
+                let i = project.line_items.indexOf(x);
+                let data = {
+                    items: [
+                        {
+                            key: x.key || '',
+                            externalId: auWizard.scope.driver.cart.lineItems[i]._cartItemId || '',
+                            quantity: x.quantity || 1,
+                            userId: x.userId || '',
+                            designIds: x.stateId || [],
+                            fields: x.fields || {},
+                            hidden: JSON.stringify(x.hidden) || ''
+                        },
+                    ]
+                }
+
+                try {
+                    const response = await fetch(`https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/raw-projects?tenantId=1379&storefrontId=1397`,
+                        {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                        });
+                    if (response.ok) {
+
+                        const data = await response.json();
+                        if (data.status == 'success') {
+                            console.log(data);
+                        } else {
+                            console.error('error: ' + data.message);
+                        }
+                    } else {
+                        let errorText = await response.text();
+                        console.error("failed to load " + response.url, response.status, response.statusText, errorText);
+                    }
+                }
+                catch (ex) {
+                    console.log('caught it!', ex);
+                }
+
+                if (bo._apps.driver.cart._lineItems[0].props === undefined) {
+                    let editorLinkOption = bo._apps.driver.products.current._options.find(x => x.title === 'BackOffice project link');
+                    let valuesArray = [
+                        data.items[0].key,
+                    ];
+                    await bo._apps.driver._cart._lineItems.current.choices.update(editorLinkOption, valuesArray);
+                } else {
+                    bo._apps.driver.cart.lineItems.forEach((item, i) => {
+                        item.data.projectId = data.items[i].key
+                    });
+                }
+            }
+
+            hideEditor();
+        });
+
+    }
+
+    function setOptionsToModel(formData, productModel) {
+        console.log(formData);
+        const formOptions = formData.filter(x => { return x['name'].startsWith('attribute['); });
+        formOptions.forEach(formOption => {
+            try {
+                const optionId = formOption['name'].match(/\d+/)[0];
+                const optionValue = formOption['value'];
+                const option = productModel.options.find(x => x.id === parseInt(optionId));
+                option.values.forEach(value => {
+                    if (value.id === parseInt(optionValue)) {
+                        value.selected = true;
+                    } else {
+                        value.selected = false;
+                    }
+                });
+            } catch (ex) {
+                console.error('Unable to preselect option', ex);
+            }
+        });
+    }
+
+    async function restoreEditionOnce(context) {
+        let formData = new FormData();
+        const restoredFormData = restoreFormData();
+        Object.keys(restoredFormData).forEach(key => {
+            formData.set(key, restoredFormData[key]);
+        })
+        const formDataArray = formDataToDictionary(formData);
+        await loadEditor(context, formDataArray, true);
+        showEditor();
+    }
+
+    function isReturned() {
+        const params = getQueryParameters();
+        return !!params['snapshot'];
+    }
+
+    function getQueryParameters(url) {
+        const params = {};
+        if (!url) url = window.location.href;
+        const queryIndex = url.lastIndexOf('?');
+        const query = url.substring(queryIndex === -1 ? url.length : queryIndex + 1);
+        const vars = query.split('&');
+        for (let i = 0; i < vars.length; i++) {
+            const pair = vars[i].split('=');
+            params[pair[0]] = decodeURIComponent(pair[1]);
+        }
+        delete params[""];
+        console.log(params);
+        return params;
+    }
+
+    function restoreOrderData() {
+        const params = getQueryParameters();
+
+        const orderRestoreData = {
+            stateId: params['stateId'],
+            snapshot: params['snapshot'],
+            key: params['cartItemId'],
+        };
+        return orderRestoreData;
+    }
+
+    function restoreFormData() {
+        const formRestoreData = {};
+        const params = getQueryParameters();
+        var options = Object.keys(params).reduce(function (options, key) {
+            if (key.startsWith('option_')) {
+                let optionId = key.match(/\d+/)[0]
+                options[`attribute[${optionId}]`] = params[key];
+            }
+            return options;
+        }, {});
+        for (let key of Object.keys(options)) {
+            formRestoreData[key] = options[key];
+        }
+        formRestoreData['quantity'] = params['quantity']
+        return formRestoreData;
+    }
+
+    function formDataToDictionary(formData) {
+        const result = [];
+        for (var pair of formData) {
+            result.push({
+                'name': pair[0],
+                'value': pair[1],
+            });
+        }
+        return result;
+    }
+
+    function hideEditor() {
+        auWizard.closeEditorPopup(true);
+    }
+
+    async function preload() {
+        this.userInfo = {
+            id: context.customer ? context.customer.id : 'guest', // ?
+            data: {
+                ...(context.customer) && { name: context.customer.name },
+                ...(context.customer) && { email: context.customer.email }
+            }
+        };
+        const bigCommerceUrl = window.location.origin // ?
+        const sku = document.querySelector('[data-product-sku]') // for addtocart
+
+        const pluginSettings = {
+            bigcommerceAdapterUrl: "https://bigcommerce-adapter.azurewebsites.net/",
+            customersCanvasBaseUrl: "https://customerscanvashub.com",
+            bigCommerceBaseUrl: bigCommerceUrl,
+            locale: 'en',   // hardcode
+            currency: context.product.price.without_tax.currency,
+            cartUrl: `cart.php`,
+            redirectToCartAfterAdd: false, // ?
+            addToCartUrl: `remote/v1/cart/add`,
+            addToCartUpdateUrl: 'cart.php',
+            updatePriceUrl: '???', // ?
+            ecommerceSystemType: 7,
+        };
+        this.storefront = new Aurigma.BackOffice({
+            tenantId: 1379,
+            ecommerceSystemId: 1397,
+            backOfficeUrl: 'https://customerscanvashub.com',
+            pluginSettings: pluginSettings,
+            themeSettings : { primaryColor: '#b78a31' }
+        });
+        
+        this.integrationInfo = await storefront.templates.findByProduct(context.product.id);
+
+        const result = await storefront.preload(this.integrationInfo, this.userInfo);
+    }
+
+    function addPersonalizeButton(context) {
+        const personalizeButton = document.querySelector('#personalize-button');
+        personalizeButton && personalizeButton.addEventListener('click', onPersonalize);
+        personalizeButton.classList.remove('loading');
+        personalizeButton.disabled = false;
+
+        function onPersonalize() {
+            let formData = getFormData()
+            loadEditor(context, formData, false)
+            showEditor()
+        }
+    }
+
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        await preload();
+        this.addPersonalizeButton(this.context);
+        const isRestored = isReturned();
+        //let stepInited = false
+        if (isRestored) {
+            await restoreEditionOnce(this.context);
+            //cleanUrl();
+        } else {
+            //cleanUrl();
+        }
+    });
+</script>

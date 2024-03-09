@@ -1,0 +1,8 @@
+<div class="productView-reviews{{#unless product.videos.list.length}} hide-wave{{/unless}}">
+    <div class="wave"></div>
+    <div class="container">
+        <div class="product-reviews">
+            <div class="yotpo-widget-instance" data-yotpo-instance-id="461714" data-yotpo-product-id="{{ product.id }}" data-yotpo-name="{{ product.title }}" data-yotpo-url="{{ product.url }}" data-yotpo-image-url="{{ getImage product.main_image }}" data-yotpo-price="{{ product.price.without_tax.value }}" data-yotpo-currency="{{ currency_selector.active_currency_code }}" data-yotpo-description="{{ product.description }}"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+{"components/cart/page-title":"<h1 class=\"page-heading\" data-cart-page-title data-aos=\"fade-up\" data-aos-duration=\"500\">\r\n    {{lang 'cart.label' quantity=cart.quantity}}\r\n</h1>\r\n"}

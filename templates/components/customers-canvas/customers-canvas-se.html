@@ -1,0 +1,224 @@
+
+<au-simple-editor></au-simple-editor>
+<link id="se-styles" rel="stylesheet">
+
+<script id="se-source"></script>
+
+<script>
+
+    const context = JSON.parse({{ jsContext }});
+
+    const addToCartUrl = "/remote/v1/cart/add";
+
+    async function getTemporaryUserId(cartId) {
+
+        if (localStorage.getItem('cc-tempUserId')) {
+            if (cartId === null) {
+                localStorage.removeItem('cc-tempUserId');
+            } else {
+                const response = await fetch(`https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/temp-user/${localStorage.getItem('cc-tempUserId')}/status?tenantId=1379&storefrontId=1397`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                    });
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.status === 0) {
+                        return data.userId;
+                    } else {
+                        localStorage.removeItem('cc-tempUserId');
+                    }
+                } else {
+                    let errorText = await response.text();
+                    console.error("failed to load " + response.url, response.status, response.statusText, errorText);
+                }
+            }
+        }
+
+        if (cartId === null) {
+            const response = await fetch(`https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/temp-user?tenantId=1379&storefrontId=1397`,
+                {
+                    method: 'POST',
+                    body: "",
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.id !== null) {
+                    localStorage.setItem('cc-tempUserId', data.id);
+                    return data.id;
+                } else {
+                    console.error('error: ' + data.message);
+                }
+            } else {
+                let errorText = await response.text();
+                console.error("failed to load " + response.url, response.status, response.statusText, errorText);
+            }
+        } else {
+            const response = await fetch(`https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/temp-user?tenantId=1379&storefrontId=1397&cartId=${cartId}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.id !== null) {
+                    localStorage.setItem('cc-tempUserId', data.id);
+                    return data.id;
+                } else {
+                    console.error('error: ' + data.message);
+                }
+            } else {
+                let errorText = await response.text();
+                console.error("failed to load " + response.url, response.status, response.statusText, errorText);
+            }
+        }
+    }
+
+    async function get(url) {
+        return await fetch(url, {
+            method: 'GET'
+        })
+            .then(handleErrors)
+            .then(response => {
+                let data = response.json();
+                return data;
+            })
+            .catch(error => console.error(error));
+    }
+
+    async function post(url, bodyData, headers) {
+        await fetch(url, {
+            method: 'POST',
+            body: bodyData,
+            headers: headers
+        })
+            .then(handleErrors)
+            .catch(error => console.error(error));
+    }
+
+    function handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
+    async function createRawProject(detail) {
+        let hidden = detail.properties._hidden;
+
+        hidden.downloadUrls = [];
+        hidden.snapshot = "";
+        hidden._snapshot = "";
+        hidden.sku = detail.sku;
+        hidden.originalProductId = detail.originalProductId;
+
+        let body = {
+            items: [
+                {
+                    designIds: [detail.key],
+                    externalId: "",
+                    fields: {},
+                    hidden: JSON.stringify(hidden),
+                    key: detail.key,
+                    quantity: detail.quantity,
+                    userId: detail.properties._userId
+                }
+            ]
+        };
+
+        let requestUrl = new URL("https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/raw-projects");
+        requestUrl.searchParams.append('tenantId', 1379);
+        requestUrl.searchParams.append('storefrontId', 1397);
+
+        let headers = {
+            "Content-Type": "application/json"
+        };
+
+        await post(requestUrl, JSON.stringify(body), headers);
+    }
+
+    async function getPimProductIntegrationDetails(sku) {
+
+        let requestUrl = new URL(
+            "https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/products/" +
+            sku +
+            "/pim-product-integration-details"
+        );
+
+        requestUrl.searchParams.append('tenantId', "1379");
+        requestUrl.searchParams.append('storefrontId', "1397");
+
+        let response = await get(requestUrl.href);
+
+        return response;
+    }
+
+    async function submit(detail) {
+        let productIntegrationDetails = await getPimProductIntegrationDetails(detail.sku);
+
+        let attribute = "attribute[" + productIntegrationDetails.productIntegrationModifierId + "]";
+
+        let body = new URLSearchParams();
+        body.append(attribute, detail.key);
+        body.append("action", "add");
+        body.append("qty[]", detail.quantity);
+        body.append("product_id", productIntegrationDetails.id);
+
+        await post(window.location.origin + addToCartUrl, body);
+    }
+
+    function redirectToCart() {
+        window.location.href = window.location.origin + "/cart.php";
+    }
+
+    async function getSimpleEditorUrlFromBO() {
+
+        let getIntegrationFromBoUrl = new URL("https://customerscanvashub.com/api/v1/tenants/1379/integrations/" + '{{product.id}}');
+        getIntegrationFromBoUrl.searchParams.append("storefrontId", "1397");
+
+        let data = await get(getIntegrationFromBoUrl);
+
+        return data.result.simpleEditorUrl;
+    }
+
+    async function setSimpleEditorScriptSource(editorConfig) {
+
+        let simpleEditorUrl = await getSimpleEditorUrlFromBO(editorConfig);
+        document.getElementById("se-styles").setAttribute("href", simpleEditorUrl + "/styles.css");
+        document.getElementById("se-source").setAttribute("src", simpleEditorUrl + "/editor.js");
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        let productId = '{{product.id}}';
+        let userId = context.customer ? context.customer.id : await getTemporaryUserId(context.cartId);
+
+        await setSimpleEditorScriptSource();
+
+        const simpleEditor = document.getElementsByTagName("au-simple-editor").item(0);
+
+        document.getElementById('se-source').addEventListener('load', function () {
+            simpleEditor.setEditorConfig({
+                backOfficeUrl: "https://customerscanvashub.com",
+                tenantId: "1379",
+                product: { id: productId },
+                user: { id: userId },
+                ecommerceSystemId: "1397"
+            });
+
+            simpleEditor.addEventListener("addtocart", async (event) => {
+                await createRawProject(event.detail);
+                await submit(event.detail);
+                redirectToCart();
+            });
+        });
+
+    });
+
+</script>

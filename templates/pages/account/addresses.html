@@ -1,0 +1,27 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h2 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{lang 'account.addresses.heading' }}</h2>
+</div>
+</div>
+<div class="common-t-s-page" data-aos="fade-up" data-aos-duration="500">
+
+    <div class="container">
+        {{> components/account/navigation account_page='addresses'}}
+
+    <div class="account account--fixedLarge">
+        <div class="account-body">
+            {{#if customer.error}}
+            {{>components/common/alert/alert-error customer.error}}
+            {{/if}}
+            {{#if customer.success}}
+            {{>components/common/alert/alert-success customer.success}}
+            {{/if}}
+            {{> components/account/address-list }}
+        </div>
+    </div>
+</div>
+</div>
+{{/partial}}
+{{> layout/base}}

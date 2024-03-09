@@ -1,0 +1,61 @@
+.template-brand {
+    #faceted-search-container {
+        @include tablet-small {
+        display: none;
+    }
+    }
+}
+
+.brandGrid {
+    @include display-flex(flex);
+    @include flex-wrap(wrap);
+    margin: 0 -1.5rem;
+
+    .brand {
+        padding: 0 1.5rem;
+        margin-bottom: 3rem;
+
+        .card {
+            padding-top: 1.6rem;
+        }
+
+        .card-image {
+            position: unset;
+            object-fit: cover;
+        }
+
+        .card-figure {
+            aspect-ratio: inherit;
+        }
+
+        .card-title {
+            @extend .fs-14;
+            line-height: 1.5rem;
+            color: $color-primary;
+            margin-top: 1rem;
+        }
+    }
+
+    .card-img-container {
+        max-width: 100%;
+        text-align: center;
+
+        &::after {
+            display: none;
+        }
+    }
+}
+
+.template-brand {}
+
+.brand-image-container {
+    max-width: 100%;
+
+    img {
+        position: static;
+    }
+
+    &::after {
+        display: none;
+    }
+}

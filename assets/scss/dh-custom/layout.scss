@@ -1,0 +1,84 @@
+.container {
+  width: 114rem;
+  padding: 0;
+  max-width: 100%;
+
+  @include tablet {
+    width: 960px;
+  }
+
+  @include tablet-small {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 144rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.custom-row {
+  @include row;
+}
+
+.grid {
+  @include col;
+}
+
+.body {
+  margin-top: 0;
+  @extend .mb-60;
+}
+.web-pages{
+  min-height: calc(100vh - 36rem);
+}
+.pages-custom-page-custom-page{
+  .body {
+    margin-bottom: 0;
+  }
+}
+
+.page {
+  @include row;
+}
+
+.page-content,
+.page-content--full,
+.page-sidebar,
+.page-sidebar+.page-content {
+  @include col;
+}
+
+.page-sidebar {
+  @include tablet-up{
+      width: 23.9%;
+  }
+  @include tablet-small {
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+
+  +.page-content {
+    @include tablet-up{
+        width: 76.1%;
+    }
+    @include tablet-small {
+      width: 100%;
+      float: none;
+      clear: both;
+    }
+  }
+}
+
+.page-content--centered {
+  width: 80%;
+
+  @include tablet {
+    width: 100%;
+  }
+}

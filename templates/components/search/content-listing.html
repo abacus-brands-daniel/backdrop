@@ -1,0 +1,10 @@
+{{#if content_results}}
+    {{> components/search/content-sort-box sort=pagination.content_results.sort}}
+    <ul class="search-content">
+        {{#each content_results}}
+            <h5 class="page-heading page-heading--small text-left"><a href="{{url}}">{{{title}}}</a> ({{type}})</h5>
+            <p>{{{content}}}</p>
+        {{/each}}
+    </ul>
+    {{> components/common/paginator pagination.content_results reload=true}}
+{{/if}}

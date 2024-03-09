@@ -1,0 +1,68 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+{{#if category.products}}
+<div class="filter">
+    {{> components/products/filter sort=pagination.category.sort}}
+</div>
+    <div data-list-name="Category: {{category.name}}" data-total-product="{{category.total_products}}" class="products-content">
+        {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+            {{> components/dh-custom/products/grid products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+
+        {{/if}}
+    </div>
+
+    {{#if pagination.category.links}}
+    {{> components/common/paginator pagination.category}}
+    {{/if}}
+{{else}}
+    {{#if category.search_error}}
+        <p>{{lang 'search.errorMessage'}}</p>
+    {{else}}
+    <ul class="productGrid" data-aos="fade-up" data-aos-duration="5000">
+        <li class="product product-upload first-cat-bg" data-aos="fade-up" data-aos-duration="500">
+            <article class="card">
+                <figure class="card-figure">
+                    <a href="/custom-8ft-backdrop-client-upload/" class="card-figure__link">
+                        <div class="card-img-container">
+                            <img class="card-image" src="/images/stencil/original/image-manager/category-upload.png?t=1690970" width="170"
+                                height="170">
+                        </div>
+                    </a>
+                </figure>
+                <div class="card-body">
+                    <div class="card-button-block">
+                        <a href="/custom-8ft-backdrop-client-upload/" data-event-type="product-click"
+                            class="button button-white-secondary button--small button-custom">Upload Your Own Design</a>
+                    </div>
+                </div>
+            </article>
+        </li>
+        <li class="product product-upload second-cat-bg" data-aos="fade-up" data-aos-duration="500">
+            <article class="card">
+                <figure class="card-figure">
+                    <a href="/custom-8ft-backdrop-client-design/" class="card-figure__link">
+                        <div class="card-img-container">
+                            <img class="card-image" src="/images/stencil/original/image-manager/category-designing.png?t=16" width="170"
+                                height="170">
+                        </div>
+                    </a>
+                </figure>
+                <div class="card-body">
+                    <div class="card-button-block">
+                        <a href="/custom-8ft-backdrop-client-design/" data-event-type="product-click"
+                            class="button button-custom-dark button--small button-custom">Start Designing</a>
+                    </div>
+                </div>
+            </article>
+        </li>
+        </ul>
+        <p data-no-products-notification
+           role="alert"
+           aria-live="assertive"
+           class="no-product"
+           tabindex="-1"
+        >
+            {{lang 'categories.no_products'}}
+        </p>
+    {{/if}}
+{{/if}}

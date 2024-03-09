@@ -1,0 +1,133 @@
+.template-compare {
+    .page {
+        margin: 0 -1rem;
+    }
+}
+
+
+.compareTable-headingText {
+    @extend .fs-14;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.compareTable-item {
+    padding: 2rem 1.5rem;
+    @extend .fs-13;
+
+    @include tablet {
+        padding-top: 4rem;
+    }
+
+    ul {
+        margin-left: 0 !important;
+        margin-bottom: 0;
+        margin-left: 1.3rem;
+        list-style: none;
+
+        li {
+            position: relative;
+            margin-bottom: 0.4rem;
+            @extend .fs-13;
+
+            &::after {
+                content: "";
+                position: absolute;
+                width: .3rem;
+                height: .3rem;
+                border-radius: 50%;
+                @extend .bg-secondary;
+                left: -1.3rem;
+                top: 0.8rem
+            }
+        }
+    }
+
+    li {
+        padding-left: 0 !important;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.compareTable-removeProduct {
+    height: 2rem;
+    width: 2rem;
+    background-color: transparent;
+
+    .icon {
+        fill: $color-primary;
+        margin-top: 0;
+        height: 100%;
+        width: 100%;
+        vertical-align: unset;
+        padding: 0;
+    }
+
+    &:hover {
+        svg {
+            fill: $color-secondary;
+        }
+    }
+}
+
+.compareTable-action {
+    padding: 0 1.5rem 2rem;
+
+    .button {
+        padding: 1.1rem 1.4rem;
+    }
+}
+
+.compareTable-heading {
+    padding: 2rem 1.5rem;
+}
+
+.compareTable-row {
+    th {
+        width: 32rem;
+
+        &:first-child {
+            @include tablet {
+                width: 0;
+            }
+        }
+    }
+
+}
+
+.comparTableCustom {
+    overflow-x: auto;
+}
+
+.compareTable-product {
+    padding: 3rem 1.5rem 0;
+}
+
+.compareTable-product {
+    .card-body {
+        .card-text {
+            a {
+                color: inherit;
+
+                &:hover {
+                    color: $color-secondary;
+                }
+            }
+        }
+
+        .price-section {
+            margin-top: auto;
+
+            span {
+                color: $color-secondary;
+            }
+        }
+    }
+
+    .card {
+        border: 0;
+    }
+}

@@ -1,0 +1,15 @@
+<img class="cart-item-personalize-image" src="" />
+{{inject "currentLineItemId" id}}
+<script>
+    var jsContext = JSON.parse({{ jsContext }});
+    console.log("Context is");
+    console.log(jsContext);
+    var imageElements = document.getElementsByClassName('cart-item-personalize-image');
+    for (var imageElement of imageElements) {
+        let imgSrc = imageElement.getAttribute("src");
+        if (imgSrc === "") {
+            imageElement.src = `https://bigcommerce-adapter.azurewebsites.net/api/bigcommerce-adapter/v1/raw-projects/preview-image?tenantId=1379&LineItemId=${jsContext.currentLineItemId}&CartId=${this.window.BCData.customersCanvasTransferObjects.CartId}&storefrontId=1397`;
+            break;
+        }
+    };
+</script>

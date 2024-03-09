@@ -1,0 +1,406 @@
+.pages-product {
+    .yotpo-review-card {
+        padding: 0 1rem;
+    }
+    .yotpo-base-layout {
+        padding-top: 0rem;
+
+        .yotpo-head {
+            height: auto;
+        }
+
+        .yotpo-title-text {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.6rem;
+        }
+
+        .yotpo-body-text {
+            margin-bottom: 2rem;
+        }
+        .yotpo-bottom-line{
+            @include mobile {
+                margin-top: 3rem;
+            }
+        }
+        .yotpo-new-review-btn-wrapper {
+            justify-content: center;
+
+            @include mobile {
+                margin-top: 0rem;
+            }
+
+            #yotpo-main-widget-btn {
+                margin-bottom: 0;
+                padding: 1.3rem 1.6rem;
+                height: auto;
+                @include border-radius(100px);
+                outline: none;
+                margin: 0;
+                font-size: 1.4rem;
+                font-weight: 600;
+                transition: 0.4s ease-in-out;
+                line-height: normal;
+                background-color: $color-secondary;
+                border-color: $color-secondary;
+
+                &:hover {
+                    background-color: $color-primary;
+                    border-color: $color-primary;
+                    color: $color-white;
+                }
+            }
+        }
+    }
+
+    #yotpo-modal.yotpo-modal {
+        @include border-radius(1.2rem);
+    }
+
+    /*========Yotop Share your thoughts==========*/
+    .yotpo-review-form-modal,
+    .yotpo-modal {
+        &:not(.modal-backdrop){
+            @include border-radius(1.2rem);
+        }
+        
+
+        .btn-close {
+            top: 1rem;
+            right: -0.7rem;
+
+            &:hover {
+                color: $color-secondary;
+            }
+        }
+
+        #modalTitle.yotpo-modal-header {
+            margin: 0;
+            font-size: 1.4rem;
+            line-height: 1.5;
+            padding: 2rem 0 2rem;
+            border-bottom: 0.1rem solid #F4F5F6;
+
+            .yotpo-modal-header {
+                margin: 0;
+            }
+        }
+
+        .modal-body {
+            padding: 0 !important;
+
+            .yotpo-star-rating-wrapper {
+                margin-bottom: 1.6rem;
+            }
+
+            .yotpo-form-label,
+            h4,
+            .yotpo-file-input-headline,
+            h6,
+            h4 {
+                font-family: 'Raleway', Arial, sans-serif;
+                margin-bottom: 1.5rem;
+                @extend .fs-13;
+                line-height: 1.5;
+                font-weight: 600;
+                margin-top: 0;
+                color: $color-primary;
+                display: inline-block;
+                position: relative;
+                width: auto;
+                max-width: fit-content;
+                text-transform: capitalize;
+
+
+                span {
+                    font-size: 3rem;
+                    color: $color-primary;
+                    line-height: 1.2;
+                    margin-bottom: 0;
+                    height: auto;
+                    display: inline-block;
+                    position: absolute;
+                    right: -1.5rem;
+                }
+
+                &.yotpo-star-rating-error {
+                    color: #cb2222 !important;
+                    text-transform: capitalize;
+                    font-size: 1.2rem;
+                    margin-top: 0.5rem;
+                    display: block;
+                    margin-bottom: 0;
+                }
+            }
+
+            .yotpo-star-rating-wrapper {
+                height: auto;
+                min-height: auto !important;
+            }
+
+            .yotpo-star-rating-icons {
+                margin-left: 0;
+                min-height: min-content;
+
+                .yotpo-star-rating-icons-wrapper {
+                    padding: 0;
+
+                    svg {
+                        width: 1.7rem;
+                        height: 1.7rem;
+                        margin: 0 1rem 0 0;
+                    }
+                }
+
+                .yotpo-star-rating-text {
+                    margin: 0;
+                    font-family: 'Raleway', Arial, sans-serif;
+                    margin-bottom: 0rem;
+                    @extend .fs-13;
+                    line-height: 1.5;
+                    font-weight: 600;
+                }
+            }
+
+            .yotpo-input-wrapper {
+                margin-bottom: 1.6rem;
+
+                textarea,
+                input {
+                    @include border-radius(1.2rem);
+                    color: $color-primary;
+                    border: 0.1rem solid $input-border-color;
+                    width: 100%;
+                    @extend .fs-13;
+                    padding: 1.15rem;
+                }
+
+                input::-webkit-input-placeholder,
+                textarea::-webkit-input-placeholder {
+                    color: $color-primary;
+                    font-size: 1.2rem;
+                }
+
+                input::-moz-placeholder,
+                textarea::-moz-placeholder {
+                    color: $color-primary;
+                    font-size: 1.2rem;
+                }
+
+                input:-ms-input-placeholder,
+                textarea:-ms-input-placeholder {
+                    color: $color-primary;
+                    font-size: 1.2rem;
+                }
+
+                input:-moz-placeholder,
+                textarea:-moz-placeholder {
+                    color: $color-primary;
+                    font-size: 1.2rem;
+                }
+
+            }
+
+            .yotpo-new-input-validation {
+                font-family: 'Raleway', Arial, sans-serif;
+                font-size: 1.2rem;
+                line-height: 1.5;
+                font-weight: 600;
+                color: #cb2222;
+                text-transform: capitalize;
+                margin-top: 0.5rem;
+                margin-bottom: 0;
+                display: block;
+            }
+
+            .yotpo-name-email-wrapper {
+                width: 100%;
+                min-width: inherit !important;
+                flex-direction: unset !important;
+
+                .yotpo-input-wrapper {
+                    width: 50% !important;
+                    padding: 0 1.5rem;
+                    min-height: auto !important;
+                    min-width: inherit !important;
+
+                    &.yotpo-new-review-name,
+                    &.yotpo-question-name {
+                        padding-left: 0;
+                    }
+
+                    &.yotpo-new-review-email,
+                    &.yotpo-question-email {
+                        padding-right: 0;
+                    }
+
+                }
+            }
+
+            .yotpo-new-input-message {
+                font-family: 'Raleway', Arial, sans-serif;
+                margin-bottom: 0rem;
+                @extend .fs-12;
+                line-height: 1.5;
+                color: $color-primary;
+                font-weight: 600;
+                text-transform: capitalize;
+                margin-top: 0.6rem;
+            }
+
+            .yotpo-file-upload {
+                .yotpo-upload-label {
+                    margin-top: 0;
+                    margin-bottom: 1.6rem;
+                    border-color: $color-primary;
+                    @include border-radius(1.2rem);
+                    transition: 0.3s ease-in-out;
+                    padding: 1.1rem 3rem !important;
+                    height: auto;
+                    width: 20rem;
+
+                    &:hover {
+                        background-color: $color-primary;
+                        border-color: $color-primary;
+                        color: $color-white;
+
+                        svg {
+                            path {
+                                fill: $color-white;
+                            }
+                        }
+                    }
+                }
+
+                .yotpo-uploaded-images {
+                    padding: 0;
+                }
+            }
+
+            .form-footer {
+                padding: 0;
+                position: inherit;
+                display: block;
+
+                h6 {
+                    margin-bottom: 0;
+                    font-family: 'Raleway', Arial, sans-serif;
+                    @extend .fs-13;
+                    line-height: 1.5;
+                    font-weight: 600;
+                    margin-top: 0;
+                    display: block;
+                    color: $color-primary;
+                    margin-bottom: 2rem;
+                    text-transform: capitalize;
+                }
+
+                .yotpo-new-review-submit,
+                button {
+                    height: auto;
+                    @include border-radius(100px);
+                    outline: none;
+                    margin: 0;
+                    padding: 1.6rem 4rem;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    transition: 0.4s ease-in-out;
+                    line-height: normal;
+                    background-color: $color-primary;
+                    border-color: $color-primary;
+
+                    &:hover {
+                        background-color: $color-secondary;
+                        border-color: $color-secondary;
+                        color: $color-white;
+                    }
+                }
+            }
+
+            .yotpo-form-complete {
+                height: auto;
+
+                .yotpo-headline-complete {
+                    font-family: 'Raleway', Arial, sans-serif;
+                    margin-bottom: 1.6rem;
+                    font-size: 2.4;
+                    line-height: 1.5;
+                    color: $color-primary;
+                    font-weight: 600;
+                }
+
+                .yotpo-body-complete {
+                    font-family: 'Raleway', Arial, sans-serif;
+                    margin-bottom: 1.6rem;
+                    font-size: 1.4rem;
+                    line-height: 1.5;
+                    color: $color-primary;
+                    font-weight: 400;
+                }
+
+                .yotpo-shop-complete {
+                    height: auto;
+                    @include border-radius(100px);
+                    outline: none;
+                    margin: 0;
+                    padding: 1.6rem 4rem;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    transition: 0.4s ease-in-out;
+                    line-height: normal;
+                    background-color: $color-primary;
+                    border-color: $color-primary;
+
+                    &:hover {
+                        background-color: $color-secondary;
+                        border-color: $color-secondary;
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+
+    .yotpo-modal.yotpo-form-complete {
+        height: auto !important;
+    }
+
+    /*========Yotop height set==========*/
+    .yotpo-device-laptop,
+    .yotpo-display-l {
+        .yotpo-review-form {
+
+            .yotpo-new-review-content,
+            .yotpo-new-review-headline {
+                height: auto;
+                min-height: auto !important;
+            }
+        }
+    }
+
+    .yotpo-display-m {
+        .yotpo-review-form {
+            .yotpo-new-review-headline {
+                height: auto;
+                width: 100% !important;
+                min-height: auto !important;
+            }
+        }
+    }
+
+
+    /*========Yotop height set==========*/
+    /*========Yotop Share your thoughts==========*/
+
+    /*===================Q&A=======================*/
+    .yotpo-device-laptop,
+    .yotpo-device-desktop {
+        .yotpo-question-form {
+            .yotpo-question-content {
+                min-height: inherit !important;
+            }
+        }
+    }
+
+    /*===================Q&A=======================*/
+}

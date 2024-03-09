@@ -1,0 +1,68 @@
+<section class="productCarousel"
+data-list-name="{{list}}"
+data-slick='{
+    "infinite": true,
+    "mobileFirst": true,
+    "slidesToShow": 2,
+    "slidesToScroll": 2,
+    "slide": "[data-product-slide]",
+    "rows": 0,
+    "dots":false,
+    "autoplay": true,
+    "arrows": false,
+    "pauseOnHover":false,
+    "pauseOnFocus":false,
+    "responsive": [
+        {
+            "breakpoint": 1279,
+            "settings": {
+                "slidesToShow": 5,
+                "slidesToScroll": 2,
+                "arrows": true
+            }
+        },
+        {
+            "breakpoint": 1023,
+            "settings": {
+                "slidesToShow": 4,
+                "slidesToScroll": 2,
+                "arrows": false
+            }
+        },
+        {
+            "breakpoint": 767,
+            "settings": {
+                "slidesToShow": 2,
+                "slidesToScroll": 2,
+                "centerMode": true,
+                "centerPadding": "130px",
+                "pauseOnHover":false,
+                "pauseOnFocus":false,
+                "arrows": false
+            }
+        },
+        {
+            "breakpoint": 320,
+            "settings": {
+                "slidesToShow": 1,
+                "slidesToScroll": 2,
+                "centerMode": true,
+                "centerPadding": "103px",
+                "pauseOnHover":false,
+                "pauseOnFocus":false,
+                "pauseOnDotsHover":false,
+                "arrows": false
+            }
+        }
+    ]
+}'
+>
+    {{#each products}}
+    <div data-product-slide class="productCarousel-slide">
+        {{> components/dh-custom/products/card show_rating=../settings.show_product_rating  settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+    </div>
+    {{/each}}
+    {{#if products.length '>' 1}}
+        {{> components/carousel-content-announcement}}
+    {{/if}}
+</section>

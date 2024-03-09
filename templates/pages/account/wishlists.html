@@ -1,0 +1,22 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+        {{#if settings.show_wishlist}}
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            <h2 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{lang 'account.wishlists.heading' }}</h2>
+        {{/if}}
+    </div>
+</div>
+<div class="common-t-s-page" data-aos="fade-up" data-aos-duration="500">
+
+    <div class="container">
+        {{#if settings.show_wishlist}}
+        <div class="account account--fixedLarge">
+            {{> components/account/navigation account_page='wishlists'}}
+            {{> components/account/wishlist-list}}
+        </div>
+        {{/if}}
+    </div>
+</div>
+    {{/partial}}
+{{> layout/base}}

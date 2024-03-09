@@ -1,0 +1,42 @@
+<a href="" id="returnToEdit-Link-{{id}}">
+    {{lang 'cc_fields.return_to_edit'}}
+</a>
+<script>
+    var jsContext = JSON.parse({{ jsContext }});
+    (async () => {
+        url = new URL('https://bigcommerce-adapter.azurewebsites.net');
+        url.searchParams.set('tenantId', '1379');
+        url.searchParams.set('storefrontId', '1397');
+        url.searchParams.set('LineItemId', jsContext.item.id);
+        if (BCData.customersCanvasTransferObjects) {
+            url.searchParams.set('CartId', BCData.customersCanvasTransferObjects.CartId);
+        } else if (jsContext.cartId) {
+            url.searchParams.set('CartId', jsContext.cartId);
+        }
+        let productLink = jsContext.item.url;
+
+        if (jsContext.item.custom_fields.find(p => p.name === 'option_based_product') != undefined) {
+            url.pathname = `/api/bigcommerce-adapter/v1/raw-projects/original-product-link`;
+            fetch(url.toString()).then(response => {
+                response.text().then(responseString => {
+                    console.log(responseString);
+                    productLink = responseString;
+                });
+            });
+        }
+
+        let linkElement = document.getElementById(`returnToEdit-Link-${jsContext.item.id}`);
+        url.pathname = `/api/bigcommerce-adapter/v1/raw-projects/return-to-edit`;
+
+        fetch(url.toString()).then(response => {
+            response.text().then(responseString => {
+
+                if (!responseString) {
+                    linkElement.remove();
+                }
+
+                linkElement.setAttribute("href", `${productLink}?${responseString}`);
+            });
+        });
+    })();
+</script>

@@ -1,0 +1,142 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{inject "ProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+{{#partial "full-page"}}
+
+
+<div class="category-banner bg-category-banner {{#unless category.image}}no-image{{/unless}}">
+  <span class="object-halfRoundedBorders"></span>
+  <span class="object-dots"></span>
+    <div class="container">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <div class="category-banner-main">
+            <div class="category-banner-wrap d-flex">
+                <div class="category-banner-block content-block">
+                    {{#unless theme_settings.hide_category_page_heading }}
+                      {{#if category.name}}
+                      <h1 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{category.name}}</h1>
+                      {{else}}
+                      <h1 class="page-heading" data-aos="fade-up" data-aos-duration="500">Categories</h1>
+                      {{/if}}
+                    {{/unless}}
+                    <div class="cat-description" data-aos="fade-up" data-aos-duration="500">
+                        {{{category.description}}}
+                    </div>
+                </div>
+                {{#if category.image}}
+                <div class="category-banner-block image-block" data-aos="fade-up" data-aos-duration="500">
+                  <div class="cat-img">
+                    
+                      {{> components/common/responsive-img
+                        image=category.image
+                        fallback_size=theme_settings.zoom_size
+                        lazyload=theme_settings.lazyload_mode
+                        class="category-header-image"
+                      }}
+                    
+                  </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-block">
+    <div class="container">
+      <div class="product-list-mobile-top-bar">
+        <div class="mobile-filter-box">
+            <div class="filter-by">Filter by</div>
+        </div>
+        <div class="mobile-sort-box"></div>
+    </div>
+        <div class="page" data-aos="fade-up" data-aos-duration="500">
+        {{#if category.faceted_search_enabled}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+        {{else if category.subcategories}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+        {{else if category.shop_by_price}}
+        {{#if theme_settings.shop_by_price_visibility}}
+        <aside class="page-sidebar" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </aside>
+        {{/if}}
+        {{/if}}
+
+        <div class="page-content" id="product-listing-container" data-aos="fade-up" data-aos-duration="5000">
+            {{> components/category/product-listing}}
+            {{{region name="category_below_content"}}}
+        </div>
+    </div>
+    </div>
+</div>
+<div class="cat-frequently-block bg-whitesmoke">
+    <div class="wave"></div>
+    <div class="container">
+      <div class="frequently-block">
+        <h2 class="page-heading" data-aos="fade-up" data-aos-duration="5000">Frequently Asked <span>Questions</span></h2>
+        <p class="text-center page-heading ">Everything you need to know about your backdrop</p>
+        <div class="frequently-block-main width-800" data-aos="fade-up" data-aos-duration="5000">
+          <div class="accordian-sub-box" data-aos="fade-up" data-aos-duration="5000">
+            <div class="title-content open" id="tab">
+              <h5 class="tab-heading">Can I change my backdrop for different events?</h5>
+            </div>
+            <div class="content">
+              <p>Yes, our backdrops are designed so that you can reuse the frame and swap out the fabric print as often you would like!</p>
+            </div>
+          </div>
+          <div class="accordian-sub-box" data-aos="fade-up" data-aos-duration="5000">
+            <div class="title-content" id="tab">
+              <h5 class="tab-heading">How much does the backdrop weigh?</h5>
+            </div>
+            <div class="content">
+              <p>The materials are all lightweight and easy to transport, weighing around 31 lbs when packed into case.</p>
+            </div>
+          </div>
+          <div class="accordian-sub-box" data-aos="fade-up" data-aos-duration="5000">
+            <div class="title-content" id="tab">
+              <h5 class="tab-heading">Can I travel with my backdrop?</h5>
+            </div>
+            <div class="content">
+              <p>Absolutely! Our backdrops all come in a durable case so you can bring it with you by land, air, or sea.</p>
+            </div>
+          </div>
+          <div class="accordian-sub-box" data-aos="fade-up" data-aos-duration="5000">
+            <div class="title-content" id="tab">
+              <h5 class="tab-heading">How long does it take to setup?</h5>
+            </div>
+            <div class="content">
+              <p>Setup is quick and easy, and can be done in about 5 minutes.</p>
+            </div>
+          </div>
+          <div class="accordian-sub-box" data-aos="fade-up" data-aos-duration="5000">
+            <div class="title-content" id="tab">
+              <h5 class="tab-heading">Where do you ship?</h5>
+            </div>
+            <div class="content">
+              <p>Currently, we ship everywhere in North America. Note that higher shipping rates may apply to locations outside of the contiguous United States.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{{region name="category_below_header"}}}
+{{/partial}}
+{{> layout/base}}

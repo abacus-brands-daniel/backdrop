@@ -1,0 +1,13 @@
+{
+  "customLayouts": {
+    "brand": {},
+    "category": {},
+    "page": {
+      "custom-page.html": "/about-us/",
+      "design-tutorial.html": "/design-tutorial/"
+    },
+    "product": {}
+  },
+  "normalStoreUrl": "https://backdrop.com",
+  "port": 3000
+}

@@ -1,0 +1,761 @@
+.skip-to-main-link{
+
+    z-index: 0;
+}
+/*--- Pencil Banner ---*/
+.head-sticky-added{
+    .pencil-banner{
+        opacity: 0;
+    }
+}
+.pencil-banner {
+    @extend .bg-primary;
+    color: $color-white;
+    text-align: center;
+    padding-top: 1.2rem;
+    padding-bottom: 1.1rem;
+
+    p {
+        color: inherit;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 0.55px;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+}
+
+.header {
+    border-bottom: none;
+    position: relative;
+    &--sticky {
+        animation-name: slideInDown;
+        animation-duration: 1.2s;
+        animation-fill-mode: both;
+        transition: .5s all ease;
+        left: 0;
+        position: fixed;
+        box-shadow: 0 4px 20px rgba(102, 102, 102, 0.1);
+        top: 0;
+        .header__navPages{
+            .navPages{
+                @include tablet-small{
+                    height: calc(100dvh - 5.7rem);
+                }
+                .navPages-item{
+                    .navPage-subMenu{
+                        @include tablet-small{
+                            height: calc(100dvh - 5.7rem);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include tablet-small {
+        height: auto;
+        padding: 0.25rem 0;
+    }
+
+    &__inner {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        @include display-flex(flex);
+        @include align-item(center);
+        @include justify-content(space-between);
+        @include tablet-small{
+            position: relative;
+        }
+
+        .mobileMenu-toggle {
+            position: relative;
+
+            @include tablet-small {
+                padding-left: 0;
+                padding-right: 0;
+                width: 2rem;
+                color: #2C3460;
+                // position: static;
+                height: 2rem;
+                overflow: inherit;
+            }
+
+            &.is-open {
+                .mobileMenu-toggleIcon {
+                    background-color: transparent;
+
+                    &:before {
+                        top: -0.1rem;
+                        width: 2.6rem;
+                    }
+
+                    &::after {
+                        bottom: 0.1rem;
+                        width: 2.6rem;
+                    }
+                }
+
+            }
+
+            .mobileMenu-toggleIcon {
+                width: 2rem;
+                background: #2C3460;
+
+                @include tablet-small {
+                    top: 0.9rem;
+                    left: 0;
+                }
+
+                &:before {
+                    width: 2rem;
+                    background: #2C3460;
+                    top: -0.6rem;
+
+                }
+
+                &::after {
+                    background: #2C3460;
+                    width: 2rem;
+                    bottom: -0.6rem;
+                }
+            }
+        }
+    }
+
+    &-logo {
+        margin: 0;
+        width: 13.7rem;
+
+        @include tablet-small {
+            width: 15.2rem;
+        }
+
+        // @include mobile {
+        //     margin-left: 1.5rem;
+        // }
+
+        &-image-container {
+            min-height: 0;
+        }
+
+        img {
+            @include tablet-small {
+                width: 100%;
+            }
+        }
+    }
+
+    &__navPages {
+        margin-left: auto;
+        margin-right: auto;
+        position: static;
+
+        @include tablet-small {
+            position: absolute;
+        }
+
+        &.is-open {
+            z-index: 9;
+            @include tablet-small{
+                padding-top: 5.7rem;
+                top: 0;
+            }
+        }
+
+        .navPages {
+            @include tablet-small {
+                height: calc(100dvh - 91px);
+                background-color: $color-white;
+                border-top: .05rem solid rgba($color-primary, 0.20);
+                position: relative;
+            }
+
+            &-item {
+                padding: 2.9rem 0rem;
+                margin: 0 2.1rem;
+
+                @include tablet-small {
+                    padding: 1.5rem 0;
+                    margin: 0 1.5rem;
+                }
+
+                &.sfHover {
+                    .navPage-subMenu {
+                        display: block;
+                        height: auto;
+                        opacity: 1;
+                        overflow: visible;
+                        pointer-events: all;
+                        clip-path: inset(0% 0 0 0);
+                    }
+
+                    > .navPages-action {
+                        color: $color-secondary;
+                        svg{
+                            fill: $color-secondary;
+                        }
+                        .icon {
+                            transform: rotate(180deg);
+                        }
+                        &.activePage{
+                            color: $color-secondary;
+                            svg{
+                                fill: $color-secondary;
+                            }
+                        }
+                    }
+                }
+
+                .navPage-subMenu {
+                    width: 100%;
+                    left: 0;
+                    top: 100%;
+                    clip-path: inset(0% 0 100% 0);
+                    background-color: $color-white;
+                    border-top: .5px solid rgba($color-primary, 0.20);
+                    border-bottom: .5px solid rgba($color-primary, 0.20);
+                    padding-top: 4rem !important;
+                    padding-bottom: 4rem !important;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.4s linear;
+                    z-index: 10;
+
+                    @include tablet-up {
+                        display: block;
+                    }
+
+                    @include tablet-small {
+                        clip-path: none;
+                        top: 0;
+                        opacity: 1;
+                        height: 100%;
+                        position: absolute;
+                        border-top: none;
+                        pointer-events: all;
+                        padding-top: 3rem !important;
+                        overflow: auto;
+                    }
+                   @supports (height: 100svh) {
+                    height: calc(100dvh - 9.1rem);
+                   }
+                    @supports (-webkit-touch-callout: none) {
+                        /* CSS specific to iOS devices */ 
+                        @include tablet-small {
+                            height: calc(100dvh - 9.1rem);
+                        }
+                      }
+                      @supports not (-webkit-touch-callout: none) {
+                        /* CSS for other than iOS devices */ 
+                        @include tablet-small {
+                            height: calc(100% - 75px);
+                        }
+                      }
+                      
+
+                    .back-menu {
+                        @include tablet-up {
+                            display: none !important;
+                        }
+                    }
+
+                    &__inner {
+                        max-width: 127.2rem;
+                        width: 100%;
+                        margin-left: auto;
+                        margin-right: auto;
+
+                        @include tablet {
+                            max-width: 123rem;
+
+                        }
+                    }
+
+                    &-list {
+                        @include display-flex(flex);
+                        max-width: 100%;
+
+                        @include tablet-small {
+                            @include flex-wrap(wrap);
+                            margin: 0;
+                            padding-left: 2.8rem;
+                            padding-right: 2.8rem;
+                        }
+                    }
+
+                    &-item {
+                        padding: 0 !important;
+
+                        @include tablet-small {
+                            width: 25%;
+                            padding: 0 1rem !important;
+                            margin-bottom: 1rem;
+                        }
+
+                        @include mobile {
+                            width: 50%;
+                        }
+                    }
+
+                    &-action {
+                        @extend .font-secondory;
+                        font-size: 1.4rem;
+                        text-align: center;
+                        padding: 0;
+                        border: none;
+                        margin-bottom: 0;
+                        font-weight: 400;
+                        text-transform: none;
+                        position: relative;
+
+                        img {
+                            width: 15.9rem;
+                            height: 18rem;
+                            object-fit: contain;
+                            max-width: 100%;
+                            max-height: 100%;
+
+                            @include tablet-small {
+                                width: 100%;
+                            }
+                            +img {
+                                position: absolute;
+                                left: 0;
+                                right: 0;
+                                top: 0;
+                                opacity: 0;
+                                margin: auto;
+                                transition: opacity 0.4s ease;
+            
+                                @include tablet-small {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+
+                        span {
+                            font-family: inherit;
+                            color: inherit;
+                            font-size: inherit;
+                            line-height: normal;
+                        }
+
+                        &:hover {
+                            color: $color-secondary;
+                            img{
+                                +img {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+
+                    .button-wrap {
+                        @extend .text-center;
+                        margin-top: 3.8rem;
+                    }
+
+                    .back-menu {
+                        padding-left: 3rem;
+                        color: $color-primary;
+                        font-weight: 600;
+                        line-height: normal;
+                        text-transform: uppercase;
+                        @extend .fs-14;
+                        margin-bottom: 1rem;
+                        display: block;
+
+                        .icon {
+                            width: 1.1rem;
+                            height: .7rem;
+                            transform: rotate(90deg);
+                            margin-left: 0;
+                            margin-right: 1.4rem;
+                            margin-top: -.2rem;
+
+                            svg {
+                                fill: $color-primary;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &-list {
+                +.navPages-list {
+                    @include tablet-small {
+                        display: none;
+                    }
+                }
+            }
+
+            &-action {
+                padding: 0;
+                @extend .fs-12;
+                line-height: normal;
+                font-weight: 600;
+                span{
+                    text-transform: none;
+                    line-height: 0;
+                    color: $color-secondary;
+                }
+                @include tablet-small{
+                    font-size: 1.4rem;
+                }
+                &.activePage{
+                    color: $color-primary;
+                    svg{
+                        fill: $color-primary;
+                    }
+                }
+                .icon {
+                    height: .6rem;
+                    line-height: 0;
+
+                    @include tablet-small {
+                        margin: 0;
+                        height: .7rem;
+                    }
+
+                    svg {
+                        stroke: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &__left {
+        @include tablet-small {
+            width: 50%;
+        }
+    }
+
+    &__right {
+        @include tablet-small {
+            width: 50%;
+        }
+
+        .navUser {
+            padding: 0;
+            position: static;
+
+            @include tablet-small {
+                transform: inherit;
+            }
+
+            &-action {
+                padding: 0;
+
+                svg {
+                    width: 1.8rem;
+                    height: 1.8rem;
+                    fill: none;
+                    stroke: $color-primary;
+                    color: $color-primary;
+                    display: block;
+                }
+
+                &:hover {
+                    svg {
+                        @include tablet-up{
+                            stroke: $color-secondary;
+                            color: $color-secondary;
+                        }
+                    }
+                }
+
+                .countPill {
+                    background-color: transparent;
+                    color: $color-secondary;
+                    @extend .fs-12;
+                    width: auto;
+                    height: auto;
+                    line-height: normal;
+                    vertical-align: middle;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    margin-left: 1.1rem;
+                    display: inline-block;
+                }
+            }
+
+            &-section {
+                @include mobile {
+                    @include display-flex(flex);
+                }
+            }
+
+            &-item {
+                margin-left: 3rem;
+
+
+                &--search {
+                    margin-left: 0;
+
+                    @include tablet-small {
+                        display: block;
+                    }
+
+                    .close-icon {
+                        stroke: inherit;
+                        display: none;
+
+                    }
+
+                    button[aria-expanded="false"] {
+                        .close-icon {
+                            display: none;
+                        }
+                    }
+
+                    button[aria-expanded="true"] {
+                        .close-icon {
+                            display: block;
+                            fill: $color-secondary;
+                            stroke: inherit;
+
+                            @include tablet-small {
+                                width: 2rem;
+                                height: 2rem;
+                            }
+
+                        }
+
+                        .search-icon {
+                            display: none;
+                        }
+                    }
+                }
+
+                &-cartLabel {
+                    display: inline-block;
+                    vertical-align: middle;
+
+                    svg {
+                        width: 1.9rem;
+                        height: 1.95rem;
+
+                        @include tablet-small {
+                            width: 2rem;
+                            height: 2rem;
+                        }
+                    }
+                }
+
+                &--account {
+                    font-size: 0;
+
+                    @include tablet-small {
+                        display: block;
+                    }
+                }
+
+                &--cart {
+                    .navUser-action {
+                        font-size: 0;
+
+                        @include tablet-small {
+                            display: block;
+                        }
+                    }
+
+                    .dropdown-menu {
+                        width: 40rem;
+                        max-width: 40rem;
+                        border: 1px solid rgba($color-primary, 0.20);
+                        @include border-radius(12px);
+                        font-size: inherit;
+                        &.is-open {
+                            top: 46px !important;
+
+                            &::before {
+                                right: 1.5rem;
+                            }
+
+                            &::after {
+                                right: 1.6rem;
+                                border-width: 9px;
+                            }
+                        }
+
+                        .previewCartItem {
+                            @include display-flex(flex);
+                            padding: 2rem;
+                            line-height: normal;
+
+                            &-image {
+                                width: 8rem;
+
+                                img {
+                                    width: 100%;
+                                    max-height: 100%;
+                                    mix-blend-mode: darken;
+                                }
+                            }
+
+                            &-content {
+                                width: calc(100% - 8rem);
+                                padding-left: 2rem;
+                                padding-right: 0;
+                            }
+
+                            &-brand,
+                            &-name {
+                                margin-bottom: .8rem;
+                            }
+
+                            &-price,
+                            &-brand {
+                                font-weight: 600;
+                                @extend .fs-13;
+                            }
+
+                            +.previewCartItem {
+                                border-top: 1px solid rgba($color-primary, 0.20);
+                            }
+                        }
+
+                        .previewCartAction {
+                            border-top: 1px solid rgba($color-primary, 0.20);
+                        }
+                    }
+                }
+
+                &--account {
+                    .navUser-action {
+                        svg {
+                            width: 1.92rem;
+                            height: 2.08rem;
+
+                            @include tablet-small {
+                                width: 2rem;
+                                height: 2rem;
+                            }
+                        }
+                    }
+                }
+
+                &--search {
+                    .navUser-action {
+                        svg {
+                            width: 2rem;
+                            height: 2rem;
+
+                            @include tablet-small {
+                                width: 2rem;
+                                height: 2rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // Search Dropdown
+            .dropdown {
+                &--quickSearch {
+                    top: 100% !important;
+                    background-color: $color-white;
+                    border: .5px solid rgba($color-primary, 0.20);
+                    border-top: .5px solid rgba($color-primary, 0.20);
+                    border-bottom: .5px solid rgba($color-primary, 0.20);
+                    @extend .pt-40;
+                    @extend .pb-40;
+                    width: 100% !important;
+                    margin: auto;
+                    @include tablet-small{
+                        padding-top: 2rem;
+                        padding-bottom: 2rem;
+                        margin-top: 0.25rem;
+                    }
+                    .productGrid {
+                        margin: 0 -1.5rem;
+                        @include tablet-small{
+                            margin: 0;
+                        }
+                    }
+
+                    .form {
+                        max-width: none;
+                    }
+
+                    .form-field {
+                        position: relative;
+                    }
+
+                    .form-input {
+                        @extend .form-input;
+                        padding: 1.6rem 2rem;
+                        padding-right: 3.8rem;
+                    }
+
+                    .button-search {
+                        position: absolute;
+                        right: 1.6rem;
+                        top: 50%;
+                        transform: translate(0, -50%);
+                        height: 1.8rem;
+                        padding: 0;
+
+                        &:hover {
+                            svg {
+                                stroke: $color-secondary;
+                            }
+                        }
+
+                        svg {
+                            fill: none;
+                            stroke: $color-primary;
+                            width: 1.8rem;
+                            height: 1.8rem;
+                        }
+                    }
+                }
+
+                .view-all-btn {
+                    text-align: center;
+                }
+
+                .quickSearchResults {
+                    .modal-close {
+                        display: none;
+                    }
+
+                    .card {
+                        content: "";
+
+                        .button--secondary {
+                            &::after {
+                                content: "";
+                                width: 1rem;
+                                height: 1.3rem;
+                                background-size: 100%;
+                                background-repeat: no-repeat;
+                                margin-left: 1rem;
+                                display: none;
+                                vertical-align: middle;
+                                @include transform(rotate(-45deg));
+                                transition: all .2s linear;
+                                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="13" viewBox="0 0 11 13" fill="none"><path d="M0 6.5L10 6.5M10 6.5L5 1.5M10 6.5L5 11.5" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>');
+                            }
+
+                            &:hover {
+                                &::after {
+                                    @include transform(rotate(0deg));
+                                    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="13" viewBox="0 0 11 13" fill="none"><path d="M0 6.5L10 6.5M10 6.5L5 1.5M10 6.5L5 11.5" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>');
+                                }
+                            }
+                        }
+                    }
+                }
+                .quickSearchMessage{
+                    font-size: inherit;
+                    @extend .mt-40;
+                }
+            }
+        }
+    }
+}

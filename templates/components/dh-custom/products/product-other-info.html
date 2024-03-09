@@ -1,0 +1,53 @@
+<div class="productView-otherInfo">
+    <ul class="accordion">
+        {{#if theme_settings.show_custom_fields_tabs '!==' true}}
+            {{#if (getVar "Measurement") '==' 1}}
+                <li class="accordion-item is-active" data-aos="fade-up" data-aos-duration="500">
+                    <h3 class="accordion-thumb">Description</h3>
+                    <div class="accordion-panel">
+                        {{#each product.custom_fields}}
+                            {{#startsWith "Description_" name}}
+                            <div class="info-fields">
+                                <dt class="info-name">{{#each (split name '_')}}{{#if @index '==' '1'}}{{this}}{{/if}}{{/each}}:</dt>
+                                <dd class="info-value">{{{value}}}</dd>
+                            </div>
+                            {{/startsWith}}
+                        {{/each}}
+                    </div>
+                </li>
+            {{/if}}
+            {{#if (getVar "Measurement") '==' 1}}
+            <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                <h3 class="accordion-thumb">Measurement & Dimensions</h3>
+                <div class="accordion-panel">
+                    {{#each product.custom_fields}}
+                        {{#startsWith "Measurement_" name}}
+                        <div class="info-fields">
+                            <dt class="info-name">{{#each (split name '_')}}{{#if @index '==' '1'}}{{this}}{{/if}}{{/each}}:</dt>
+                            <dd class="info-value">{{{value}}}</dd>
+                        </div>
+                        {{/startsWith}}
+                    {{/each}}
+                </div>
+            </li>
+            {{/if}}
+            {{#if (getVar "Warranty") '==' 1}} 
+                <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                    <h3 class="accordion-thumb">Warranty & Shipping</h3>
+                    <div class="accordion-panel">
+                        {{#each product.custom_fields}}
+                        {{#startsWith "Warranty_" name}}
+                        <div class="info-fields">
+                            <dt class="info-name">{{#each (split name '_')}}{{#if @index '==' '1'}}{{this}}{{/if}}{{/each}}:</dt>
+                            <dd class="info-value">{{{value}}}</dd>
+                        </div>
+                        {{/startsWith}}
+                        {{/each}}
+                        <p>Click here for more on our <a href="https://www.displayoverstock.com/return-warranty-policy/" target="_blank">Warranty & Returns Policy</a></p>
+                    </div>
+                </li>
+             {{/if}}
+        {{/if}}
+        
+    </ul>
+</div>

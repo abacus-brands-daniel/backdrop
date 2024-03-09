@@ -1,0 +1,132 @@
+{{#if banners.bottom}}
+    <div class="banners" data-banner-location="bottom">
+        {{#each (limit banners.bottom_metadata 1)}}
+            <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                <div data-event-type="promotion-click">
+                    {{{this.content}}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}
+<div class="footer-top">
+    {{#if (hyphenate (dashcase template) '===' 'pages-home')}}
+    <div class="wave"></div>
+    {{/if}}
+    <div class="object-halfRoundedBordersRight"></div>
+    <div class="container">
+        <div class="footer-subscription">
+            {{#if settings.show_newsletter_box}}
+                {{> components/common/subscription-form}}
+            {{/if}}
+        </div>
+    </div>
+</div>
+<footer class="footer" role="contentinfo">
+    <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
+    <div class="container">
+        <section class="footer-info">
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages" data-aos="fade-up" data-aos-duration="5000" data-aos-offset="-200">
+                <h3 class="footer-info-heading footer-title active">{{lang 'footer.navigate'}}</h3>
+                <ul class="footer-info-list is-active">
+                    {{#each pages}}
+                        {{#or (if name '===' 'About Us') (if name '===' 'Blog')}}
+                        <li>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                        {{/or}}
+                    {{/each}}
+                </ul>
+            </article>
+
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-categories" data-aos="fade-up" data-aos-duration="5000" data-aos-offset="-200">
+                <h3 class="footer-info-heading footer-title">Help & Support</h3>
+                <ul class="footer-info-list">
+                    <li>
+                        <a href="/contact-us/">Contact Us</a>
+                    </li>
+                    {{#if settings.phone_number}}
+                    <li>
+                        <a href="tel:{{settings.phone_number}}">{{settings.phone_number}}</a>
+                    </li>
+                    {{/if}}
+                    <li>
+                        <a href="/shipping-returns/" target="_blank">Shipping & Returns</a>
+                    </li>
+                    <li>
+                        <a href="/terms-of-service/" target="_blank">Terms of Service</a>
+                    </li>
+                </ul>
+            </article>
+
+            {{#and theme_settings.shop_by_brand_show_footer shop_by_brand.length}}
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-brands" data-aos="fade-up" data-aos-duration="5000" data-aos-offset="-200">
+                <h3 class="footer-info-heading footer-title">{{lang 'footer.brands'}}</h3>
+                <ul class="footer-info-list">
+                    {{#each shop_by_brand}}
+                        <li>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                    <li><a href="{{urls.brands}}">{{lang 'common.view_all'}}</a></li>
+                </ul>
+            </article>
+            {{/and}}
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-categories" data-aos="fade-up" data-aos-duration="5000" data-aos-offset="-200">
+                <h3 class="footer-info-heading footer-title">Account</h3>
+                <ul class="footer-info-list">
+                    {{#if customer}}
+                    <li>
+                        <a href="{{urls.account.index}}" aria-label="{{lang 'common.account'}}">{{lang 'common.account'}}</a>
+                    </li>
+                    <li>
+                        <a href="{{urls.auth.logout}}" aria-label="{{lang 'common.logout'}}">{{lang 'common.logout'}}</a>
+                    </li>
+                    {{else}}
+                    <li>
+                        <a href="{{urls.auth.login}}" aria-label="{{lang 'common.login'}}">{{lang 'common.login'}}</a>
+                    </li>
+                    <li>
+                        <a href="{{urls.auth.create_account}}" aria-label="{{lang 'common.sign_up'}}">{{lang 'common.sign_up'}}</a>
+                    </li>
+                    {{/if}}
+                    <li>
+                        <a href={{urls.account.orders.all}}>Order Status</a>
+                    </li>
+                    {{#if settings.gift_certificates_enabled}}
+                    <li>
+                        <a href="{{urls.gift_certificate.purchase}}" aria-label="{{lang 'common.gift_cert'}}">
+                            {{lang 'common.gift_cert'}}
+                        </a>
+                    </li>
+                {{/if}}
+                </ul>
+            </article>
+            {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+                <article class="footer-info-col footer-info-col--social" data-section-type="footer-webPages" data-aos="fade-up" data-aos-duration="5000" data-aos-offset="-200">
+                    <h3 class="footer-info-heading footer-social-title">{{lang 'social.connect'}}</h3>
+                    {{> components/common/social-links}}
+                </article>
+            {{/if}}
+            {{!--<article class="footer-info-col" data-section-type="newsletterSubscription">
+                {{> components/common/payment-icons}}
+            </article>--}}
+        </section>
+        
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            {{#if theme_settings.show_powered_by}}
+                <div class="footer-copyright">
+                    <p class="powered-by">{{lang 'footer.powered_by'}} <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>
+                </div>
+            {{/if}}
+            {{#if theme_settings.show_copyright_footer}}
+                <div class="footer-copyright">
+                    <p class="powered-by">Copyright &copy; {{moment format="YYYY"}} {{settings.store_name}}. All rights reserved.</p><ul><li><a href="https://tradeshowbooth.com/pages/terms-of-service" target="_blank">Terms & Conditions</a></li><li><a href="https://tradeshowbooth.com/pages/privacy-policy" target="_blank">Privacy Policy</a></li></ul>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    {{{region name="ssl_site_seal--global"}}}
+</footer>

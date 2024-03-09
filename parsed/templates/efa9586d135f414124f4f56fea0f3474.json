@@ -1,0 +1,1 @@
+{"components/products/custom-fields":"{{#each product.custom_fields}}\r\n    {{#all (if name '!=' 'customers_canvas_integrated') (if name '!=' 'customers_canvas_editor_family')}}\r\n        <dt class=\"productView-info-name\">{{name}}:</dt>\r\n        <dd class=\"productView-info-value\">{{{value}}}</dd>\r\n    {{/all}}\r\n{{/each}}\r\n"}

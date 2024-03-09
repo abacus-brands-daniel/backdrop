@@ -1,0 +1,23 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h2 class="page-heading" data-aos="fade-up" data-aos-duration="5000">{{lang 'account.payment_methods.heading' }}</h2>
+    </div>
+    </div>
+    <div class="common-t-s-page" data-aos="fade-up" data-aos-duration="5000">
+
+        <div class="container">
+            
+            
+            {{> components/account/navigation account_page='payment_methods'}}
+            
+            <div class="account account--fixedLarge">
+                <div class="account-body">
+                    {{> components/account/payment-methods-list }}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}

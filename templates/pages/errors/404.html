@@ -1,0 +1,26 @@
+{{#partial "full-page"}}
+<div class="bg-cream-banner">
+    <div class="container">
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+<h1 class="page-heading" data-aos="fade-up" data-aos-duration="5000">{{lang 'page_not_found.page_heading'}}</h1>
+</div>
+</div>
+<div class="common-t-s-page">
+
+    <div class="container">
+        <div class="page error-page" data-aos="fade-up" data-aos-duration="5000">
+            <section class="page-content page-content--centered">
+                
+                <p class="u-textAlignCenter">
+                    {{lang 'page_not_found.message'}}
+                </p>
+                
+                {{> components/common/search-box}}
+            </section>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

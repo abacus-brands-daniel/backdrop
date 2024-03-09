@@ -1,0 +1,14 @@
+<ul class="productGrid">
+    {{#each wishlist.items}}
+    <li class="product" data-aos="fade-up" data-aos-duration="5000">
+        {{> components/dh-custom/products/card id=product_id theme_settings=../theme_settings}}
+        
+        {{#if ../show_remove}}
+            <form action="{{remove_url}}" class="form remove-item-button" method="post">
+                <input type="submit" class="button button--primary button--small" value="{{lang 'account.wishlists.remove_item'}}" />
+            </form>
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
+{{> components/common/paginator wishlist.pagination}}

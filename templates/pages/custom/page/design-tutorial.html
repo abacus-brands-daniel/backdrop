@@ -1,0 +1,267 @@
+{{#partial "full-page"}}
+
+<div class="category-banner bg-category-banner design-head">
+    <span class="object-halfRoundedBorders" data-aos="fade-In" data-aos-duration="500"></span>
+    <span class="object-triAnglesLines" data-aos="fade-In" data-aos-duration="500"></span>
+    <span class="object-triAngles" data-aos="fade-In" data-aos-duration="500"></span>
+    <span class="object-fill-bluelight-circle" data-aos="fade-In" data-aos-duration="500"></span>
+      <div class="container">
+          {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+          <div class="category-banner-main">
+              <div class="category-banner-wrap d-flex">
+                  <div class="category-banner-block content-block">
+                    {{#unless theme_settings.hide_page_heading }}
+                        <h1 class="page-heading" data-aos="fade-up" data-aos-duration="500">{{ page.title }}</h1>
+                    {{/unless}}
+                      <div class="cat-description design-description" data-aos="fade-up" data-aos-duration="500">
+                        Welcome to our online design tutorial hub! Here, you'll find answers to common questions about our online design tool. Whether you're a novice looking to learn the basics or a seasoned user seeking advanced tips and tricks, our tutorials cover everything you need to know. From creating mesmerizing stage backgrounds to crafting stunning digital backdrops for events, our expert-led tutorials will guide you through every step of the process.
+                      </div>
+                  </div>
+                  <div class="category-banner-block image-block design-hero" data-aos="fade-up" data-aos-duration="500">
+                    <div class="cat-img">
+                      
+                        {{> components/common/responsive-img
+                          image='/images/stencil/original/image-manager/tutorial-hero-new.png'
+                          fallback_size=theme_settings.zoom_size
+                          lazyload=theme_settings.lazyload_mode
+                          class="category-header-image"
+                        }}
+                      
+
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+<div class="about-page-content design-page-content">
+    <span class="object-solid-border-circles"></span>
+    <div class="about-rows design-rows">
+        <div class="row-collaborative about-row container-fluid design-row-1">
+            <div class="about-row--inner" data-aos="fade-In" data-aos-duration="500">
+                <div class="container">
+                    <h2>Video Tutorial</h2>
+                    <h3 class="gold-sub">Customizing your backdrop theme</h3>
+
+                    <div class="design-columns" data-aos="fade-down" data-aos-duration="500">
+
+                        <button data-type='customization' class="button button--primary focused">
+                            Theme Customization
+                        </button>
+
+                        <button data-type='repeat' class="button button--primary">
+                            Step & Repeat
+                        </button>
+
+                        <button data-type='saving' class="button button--primary">
+                            Saving My Projects
+                        </button>
+
+                        <button data-type='qr' class="button button--primary">
+                            Adding QR Codes
+                        </button>
+
+                    </div>
+
+                    <div class="design-videos">     
+                        <div class="design-video-wrapper focused" data-type='customization'>
+                            <div class="design-overlay"></div>
+                            <div class="design-play-btn"></div>
+                            <video loading='lazy' class="design-video" controls playsinline src="https://store-6xrgduy3rr.mybigcommerce.com/content/video/Design%20Tutorial%20-%20Version%201.mp4" width="1440px" height="auto" ></video>
+                        </div>
+                        <div class="design-video-wrapper" data-type='repeat'>
+                            <div class="design-overlay"></div>
+                            <div class="design-play-btn"></div>
+                            <video loading='lazy' class="design-video" controls playsinline src="https://store-6xrgduy3rr.mybigcommerce.com/content/video/Design%20Tutorial%20-%20Version%201.mp4" width="1440px" height="auto" ></video>
+                        </div>
+                        <div class="design-video-wrapper" data-type='saving'>
+                            <div class="design-overlay"></div>
+                            <div class="design-play-btn"></div>
+                            <video loading='lazy'  class="design-video" controls playsinline src="https://store-6xrgduy3rr.mybigcommerce.com/content/video/Design%20Tutorial%20-%20Version%201.mp4" width="1440px" height="auto" ></video>
+                        </div>
+                        <div class="design-video-wrapper" data-type='qr'>
+                            <div class="design-overlay"></div>
+                            <div class="design-play-btn"></div>
+                            <video loading='lazy' class="design-video" controls playsinline src="https://store-6xrgduy3rr.mybigcommerce.com/content/video/Design%20Tutorial%20-%20Version%201.mp4" width="1440px" height="auto" ></video>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="playbook-wrapper">
+            <span class="object-circle"></span>
+            <span class="object-dots"></span>
+            <div class="row-creative container-fluid mb-200" data-aos="fade-In" data-aos-duration="500">
+                <div class="about-row--inner" data-aos="fade-In" data-aos-duration="500">
+                    <div class="container">
+                        <h2 class="page-heading designer-playbook">Designer's <span>Playbook</span> </h2>
+                        <p class="designer-playbook-sub">In this section, you'll discover a more in-depth guide on how to use our intuitive
+                            online design tool to edit themes or create your own artwork from scratch.</p>
+
+                        <ul class="accordion">
+                            <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                                <h3 class="accordion-thumb"><span class="counter-digits">0.1</span> Text Formatting</h3>
+                                <div class="accordion-panel" data-aos="fade-up" data-aos-duration="500">
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Text vs Text Block</h4>
+                                            <p>Select <span class="gold-bold">Text</span> to create a textbox with no set width <span class="design-italic">(no text wrapping)</span>.</p>
+                                            <p>Select <span class="gold-bold">Text Block</span> to create a textbox with a set width and height (text wrapping).</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload design-text-image" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/textblock-img.png"
+                                            data-src="/images/stencil/original/image-manager/textblock-img.png"
+                                            alt="Text Block" title="Text Block" loading="lazy">
+                                        </dd>
+                                    </div>
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Text Attributes</h4>
+                                            <p><span class="gold-bold">Double-click</span> the text box to edit the text directly.</p>
+                                            <p class="mt-10">From here you can use the Top Tool Bar to adjust the size, style, weight, color, text alignment, spacing and stroke.</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/attribute-img.png"
+                                            data-src="/images/stencil/original/image-manager/attribute-img.png"
+                                            alt="Text Attributes" title="Text Attributes" loading="lazy">
+                                        </dd>
+                                    </div>
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Border, Opacity & Shadows</h4>
+                                            <p>To access the additional attributes, <span class="gold-bold">Select</span> the text layer then click the <span class="gold-bold">More Controls Arrow</span> on the right side of the Top Tool Bar.</p>
+                                            <p class="mt-10">From here you can use the Top Tool Bar to adjust the text border thickness & color, opacity, alignment, arrangement, drop shadow.</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/border-img.png"
+                                            data-src="/images/stencil/original/image-manager/border-img.png"
+                                            alt="Border, Opacity & Shadows" title="Border, Opacity & Shadows" loading="lazy">
+                                        </dd>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                                <h3 class="accordion-thumb"><span class="counter-digits">0.2</span> Adding & Editing Images</h3>
+                                <div class="accordion-panel">
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Adding & Swapping Images</h4>
+                                            <p>Select the <span class="gold-bold">Image Icon</span> on the Side Bar to add an image to the canvas. You can select from the gallery or upload your own.</p>
+                                            <p class="mt-10">To swap out or replace an image on the canvas, select the image, then select the <span class="gold-bold">Image Icon</span> on the Top Tool Bar or Pop-up Menu. These options can also be accessed by Right-Clicking on the image.</p>
+                                            <p class="mt-10">From here you can use the Top Tool Bar to adjust the image border thickness & color, opacity, alignment, and arrangement.</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/swapping-img.png"
+                                            data-src="/images/stencil/original/image-manager/swapping-img.png"
+                                            alt="Adding & Swapping Images" title="Adding & Swapping Images" loading="lazy">
+                                        </dd>
+                                    </div>
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Editing and Deleting Images</h4>
+                                            <p>To edit an image, on the Pop-up Menu, select the <span class="gold-bold">Pencil Icon</span>. This option can also be accessed by Right-Clicking on the image.</p>
+                                            <p class="mt-10">From here you can use the Editor Tool Bar to remove the <span class="gold-bold">Background, Adjust</span> the brightness/contrast/saturation/hue and <span class="gold-bold"> Crop.</span></p>
+                                            <p class="mt-10">To delete an image, on the Pop-up Menu, select the <span class="gold-bold">Trash Icon.</span></p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/deleting-img.png"
+                                            data-src="/images/stencil/original/image-manager/deleting-img.png"
+                                            alt="Editing & Deleting Images" title="Editing & Deleting Images" loading="lazy">
+                                        </dd>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                                <h3 class="accordion-thumb"><span class="counter-digits">0.3</span> Object Formatting</h3>
+                                <div class="accordion-panel">
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Creating Shapes</h4>
+                                            <p>Use the <span class="gold-bold">Shape Icon</span> on the Side Tool bar to add your desired shape. To enlarge the shape proportionally, <span class="gold-bold">Hold Shift</span> while dragging the corner Handle.</p>
+                                            <p class="mt-10">Use the <span class="gold-bold">Rotation Icon</span> to rotate the shape in any direction.</p>
+                                            <p class="mt-10">From here you can use the Top Tool Bar to adjust the shape border thickness & color, opacity, alignment, and arrangement.</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload design-shapes-image" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/shapes-img.png"
+                                            data-src="/images/stencil/original/image-manager/shapes-img.png"
+                                            alt="Creating Shapes" title="Creating Shapes" loading="lazy">
+                                        </dd>
+                                    </div>
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Duplicating Objects</h4>
+                                            <p>To duplicate an Object, <span class="gold-bold">Right-Click</span> then select the <span class="gold-bold">Clone Object</span> icon.</p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload design-duplicating-image" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/duplicate-img.png"
+                                            data-src="/images/stencil/original/image-manager/duplicate-img.png"
+                                            alt="Duplicating Objects" title="Duplicating Objects" loading="lazy">
+                                        </dd>
+                                    </div>
+                                    <div class="info-fields">
+                                        <dt class="info-name">
+                                            <h4>Creating QR Codes</h4>
+                                            <p>Select the <span class="gold-bold">Barcode Icon</span> to create a Barcode or QR Code. When creating a QR Code, there are <span class="gold-bold">(4)</span> kinds to choose from:</p>
+                                            <p>
+                                            <ul class="mt-10 design-list">
+                                                <li class="gold-bold">Business Card</li>
+                                                <li class="gold-bold">Website URL</li>
+                                                <li class="gold-bold">Phone Number</li>
+                                                <li class="gold-bold">Code Data.</li>
+                                            </ul>
+                                            </p>
+                                        </dt>
+                                        <dd class="info-value">
+                                            <img class="lazyload design-qr-image" data-sizes="auto"
+                                            src="/images/stencil/original/image-manager/qr-img.png"
+                                            data-src="/images/stencil/original/image-manager/qr-img.png"
+                                            alt="Creating QR Codes" title="Creating QR Codes" loading="lazy">
+                                        </dd>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item" data-aos="fade-up" data-aos-duration="500">
+                                <h3 class="accordion-thumb"><span class="counter-digits">0.4</span> More Tutorials</h3>
+                                <div class="accordion-panel">
+                                    <div class="info-fields">
+                                        <p class="info-value">Data</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    <section class="ig-frequently-block bg-dark-blue" >
+        <div class="wave"></div>
+        <div class="container">
+            <div class="object-fill-bluelight-circle"></div>
+            <span class="object-triAnglesLines"></span>
+          <div class="ig-inspiration-block">
+            <h2 class="page-heading" data-aos="fade-up" data-aos-duration="500"><span>Follow us</span> for more inspiration!</h2>
+            <p class="text-center page-heading" data-aos="fade-up" data-aos-duration="500">@backdrop_com #backdropmoments</p>
+            <div class="ig-feed" data-aos="fade-up" data-aos-duration="500">
+                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                <div class="elfsight-app-1f8dc892-f38f-431f-8dba-0017d72c1701"></div>
+            </div>
+          </div>
+      </section>
+</div>
+{{/partial}}
+
+{{> layout/base}}
